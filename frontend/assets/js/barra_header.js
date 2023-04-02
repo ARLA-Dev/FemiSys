@@ -18,6 +18,7 @@ barra_header.innerHTML =
   </a>
 
   <div class="collapse navbar-collapse">
+
     <ul class="navbar-nav ml-auto">
   
       <li>

@@ -9,20 +9,20 @@ barra_navegacion.innerHTML =
             <div class="b-bg">
               <i class="feather icon-trending-up"></i>
             </div>
-            <span class="b-title">FemiSys</span>
+            <span class="b-title" style="font-size: 30px;">FemiSys</span>
           </a>
         </div>
 
         <div class="navbar-content scroll-div">
           <ul class="nav pcoded-inner-navbar">
             <li class="nav-item pcoded-menu-caption">
-              <label>Navegación</label>
+              <label style="font-size: 14px;">Navegación</label>
             </li>
 
             <li class="nav-item" id="elemento_index">
               <a href="index.html" class="nav-link">
                 <span class="pcoded-micon">
-                  <i class="feather icon-home"></i>
+                  <i class="fa fa-home"></i>
                 </span>
                 <span class="pcoded-mtext">Dashboard</span>
               </a>
@@ -31,22 +31,22 @@ barra_navegacion.innerHTML =
             <li class="nav-item" id="elemento_pacientes">
               <a href="pacientes.html" class="nav-link"
                 ><span class="pcoded-micon"
-                  ><i class="feather icon-sidebar"></i></span
+                  ><i class="fa fa-users"></i></span
                 ><span class="pcoded-mtext">Pacientes</span></a>
             </li>
 
             <li class="nav-item" id="elemento_consultas">
               <a href="consultas.html" class="nav-link">
                 <span class="pcoded-micon">
-                  <i class="feather icon-sidebar"></i></span>
+                  <i class="fa fa-notes-medical"></i></span>
                 <span class="pcoded-mtext">Consultas</span></a>
             </li>
 
             <li class="nav-item" id="elemento_usuarios">
               <a href="usuarios.html" class="nav-link">
                 <span class="pcoded-micon">
-                  <i class="feather icon-sidebar"></i></span>
-                <span class="pcoded-mtext">Usuarios</span></a>
+                  <i class="fa fa-user-md"></i></span>
+                <span class="pcoded-mtext">Administrar Usuarios</span></a>
             </li>
 
           </ul>
