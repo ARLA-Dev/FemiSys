@@ -1877,18 +1877,18 @@ p.text-muted {
   overflow: hidden;
 }
 .pcoded-header .dropdown .profile-notification .pro-head {
-  color: #fff;
+  color: #000;
   border-radius: 0.25rem 0.25rem 0 0;
   padding: 15px;
   position: relative;
-  background: #04a9f5;
+  background: #1de9b6;
 }
 .pcoded-header .dropdown .profile-notification .pro-head img {
   width: 40px;
   margin-right: 10px;
 }
 .pcoded-header .dropdown .profile-notification .pro-head .dud-logout {
-  color: #fff;
+  color: #000;
   padding-right: 0;
   position: absolute;
   right: 0;
@@ -1925,7 +1925,7 @@ p.text-muted {
   background: transparent;
 }
 .pcoded-header .dropdown.drp-user.show:before {
-  color: #04a9f5;
+  color: #1de9b6;
 }
 
 /* header css end */
@@ -7722,22 +7722,23 @@ a.btn-theme.active {
 }
 
 .btn-success {
-  color: #fff;
+  font-weight: bold;
+  color: #000;
   background-color: #1de9b6;
   border-color: #1de9b6;
 }
 .btn-success:hover {
-  color: #fff;
+  color: #000;
   background-color: #14cc9e;
   border-color: #13c095;
 }
 .btn-success.disabled, .btn-success:disabled {
-  color: #fff;
+  color: #000;
   background-color: #1de9b6;
   border-color: #1de9b6;
 }
 .btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show > .btn-success.dropdown-toggle {
-  color: #fff;
+  color: #000;
   background-color: #13c095;
   border-color: #12b58c;
 }

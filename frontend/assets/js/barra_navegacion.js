@@ -42,11 +42,11 @@ barra_navegacion.innerHTML =
                 <span class="pcoded-mtext">Consultas</span></a>
             </li>
 
-            <li class="nav-item" id="elemento_usuarios">
-              <a href="usuarios.html" class="nav-link">
+            <li class="nav-item" id="elemento_ajustes">
+              <a href="ajustes.html" class="nav-link">
                 <span class="pcoded-micon">
-                  <i class="fa fa-user-md"></i></span>
-                <span class="pcoded-mtext">Administrar Usuarios</span></a>
+                  <i class="fa fa-cog"></i></span>
+                <span class="pcoded-mtext">Ajustes</span></a>
             </li>
 
           </ul>
@@ -65,8 +65,8 @@ function marcar_activo() {
   if(pagina === "consultas"){
     document.getElementById("elemento_consultas").classList.add("active");
   }
-  if(pagina === "usuarios"){
-    document.getElementById("elemento_usuarios").classList.add("active");
+  if(pagina === "ajustes"){
+    document.getElementById("elemento_ajustes").classList.add("active");
   }
 }
 
