@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Arla-Inc" />
+    <title>FemiSys - Paciente</title>
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" /> <!-- Favicon icon -->
+    <link rel="stylesheet" href="assets/fonts/fontawesome/css/fontawesome-all.min.css" /> <!-- fontawesome icon -->
+    <link rel="stylesheet" href="assets/plugins/animation/css/animate.min.css" /> <!-- animation css -->
+    <link rel="stylesheet" href="assets/css/style.css" /> <!-- vendor css -->
+  </head>
+
+  <body>
+    <!--BARRA DE NAVEGACIÓN -->
+    <div id="barra_navegacion"></div>
+    <!--FIN BARRA DE NAVEGACIÓN -->
+
+   <!--BARRA DE NAVEGACIÓN HEADER-->
+   <header class="navbar pcoded-header navbar-expand-lg navbar-light" id="barra_header"></header>
+   <!--FIN BARRA DE NAVEGACIÓN HEADER-->
+
+    <!--CONTENEDOR PRINCIPAL-->
+    <div class="pcoded-main-container">
+      <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+          <div class="page-header">
+            <div class="page-block">
+              <div class="row align-items-center">
+                <div class="col-md-12">
+                  <div class="page-header-title">
+                    <h3 class="m-b-10">Pacientes</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="main-body">
+            <div class="page-wrapper">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="i_cedula" class="form-label">Cédula</label>
+                        <input placeholder="Cédula..." value="" type="text" id="i_cedula" class="form-control" required />
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">    
+                      <div class="form-group">
+                          <label for="i_fnac" class="form-label">Fecha de Nacimiento</label>
+                          <input type="date" id="i_fnac" class="form-control" required />
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="i_nombre" class="form-label">Nombre</label>
+                          <input placeholder="Nombre..." value="" type="text" id="i_nombre" class="form-control" required />
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6">    
+                        <div class="form-group">
+                            <label for="i_apellido" class="form-label">Apellido</label>
+                            <input placeholder="Apellido..." value="" type="text" id="i_apellido" class="form-control" required />
+                        </div>
+                      </div>
+                     
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="s_nacionalidad" class="form-label">Nacionalidad</label>
+                          <select id="s_nacionalidad" class="form-control">
+                            <option>Venezolano(a)</option>
+                            <option>Extranjero(a)</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="i_lnac" class="form-label">Lugar de Nacimiento</label>
+                          <input placeholder="Lugar de Nacimiento..." value="" type="text" id="i_lnac" class="form-control" required />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">    
+                        <div class="form-group">
+                            <label for="i_direccion" class="form-label">Dirección</label>
+                            <input placeholder="Dirección..." value="" type="text" id="i_direccion" class="form-control" required />
+                        </div>
+                      </div>
+                     
+                    <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="i_telefono" class="form-label">Télefono</label>
+                          <input placeholder="Télefono..." value="" type="tel" id="i_telefono" class="form-control" required />
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6">    
+                        <div class="form-group">
+                          <label for="s_edocivil" class="form-label">Estado Civil</label>
+                          <select id="s_edocivil" class="form-control">
+                            <option>Soltero(a)</option>
+                            <option>Casado(a)</option>
+                            <option>Viudo(a)</option>
+                            <option>Divorciado(a)</option>
+                          </select>
+                        </div>
+                      </div>
+                     
+                      <div class="col-md-6">    
+                        <div class="form-group">
+                            <label for="ta_antecedentes" class="form-label">Antecedentes</label>
+                            <textarea rows="1" id="ta_antecedentes" class="form-control" placeholder="Antecedentes..."></textarea>
+                        </div>
+                      </div>
+              
+                    <!--BTN-->
+                    <div class="col-md-12 mt-3">
+                      <div class="form-group">
+                        <label style="color: transparent !important;">Editar Paciente</label> <br>
+                        <div class="mb-3 input-group"
+                          style="display: flex; align-items: center; justify-content: right;  background-color: transparent !important;">
+                          <button type="button" class="btn btn-primary"><i class="fa fa-save"></i>Editar Paciente</button>
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIN BTN-->
+                    
+                    <!--SEGUNDA FILA-->
+                    <div class="col-md-6 mt-3">
+                      <div class="form-group">
+                        <label>Filtrar:</label>
+                        <div class="mb-3 input-group">
+                          <input aria-label="Text input with checkbox" class="form-control" placeholder="Consulta..." type="text">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"
+                              style="width: 54.5px; text-align: center; padding: 0; display: flex; align-items: center; justify-content: center;">
+                              <i class="fa fa-search"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 mt-3">
+                      <div class="form-group">
+                        <label style="color: transparent !important;">Agregar Consulta</label> <br>
+                        <div class="mb-3 input-group"
+                          style="display: flex; align-items: center; justify-content: right;  background-color: transparent !important;">
+                          <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i>Agregar Consulta</button>
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIN SEGUNDA FILA-->
+                   
+                    
+              
+                    <!--TABLA DE PACIENTES-->
+              
+                    <div class="col-md-12">
+                      <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Fecha<br>(YYYY-MM-DD)</th>
+                              <th>Peso</th>
+                              <th>Nota Evolutiva</th>
+                              <th>Recipe</th>
+                              <th>Indicaciones</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1</td>
+                              <td>2022-01-01</td>
+                              <td>30KG</td>
+                              <td>ABC</td>
+                              <td>DEF</td>
+                              <td>GHI</td>
+                              <td>
+                                <a class="see" href="consulta.html" style="cursor:pointer"><i class="material-icons">&#xe8f4;</i></a>
+                                <a class="delete" style="cursor:pointer"><i class="material-icons">&#xE872;</i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--FIN TABLA DE PACIENTES-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+      
+    </div>
+    <!--FIN CONTENEDOR PRINCIPAL-->
+
+    <!-- JS REQUERIDO -->
+    <script src="assets/js/vendor-all.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/pcoded.min.js"></script>
+    <script>var pagina = "paciente";</script>
+    <script src="assets/js/barra_navegacion.js"></script>
+    <script src="assets/js/barra_header.js"></script>
+    <!-- FIN JS REQUERIDO -->
+    
+  </body>
+</html>
