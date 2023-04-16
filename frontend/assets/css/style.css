@@ -7765,12 +7765,13 @@ a.btn-theme.active {
 }
 
 .btn-warning {
-  color: #fff;
+  font-weight: bold;
+  color: #000;
   background-color: #f4c22b;
   border-color: #f4c22b;
 }
 .btn-warning:hover {
-  color: #fff;
+  color: #000;
   background-color: #ecb50c;
   border-color: #e0ab0c;
 }
@@ -10518,6 +10519,12 @@ div.code-toolbar > .toolbar span:hover {
 	bottom: 50px;
 	opacity: 1
 }
+
+textarea{
+  min-height: 43.5px;
+  resize: vertical;
+}
+
 @-webkit-keyframes pulse {
 	0% {
 		-webkit-box-shadow: 0 0 0 0 rgba(121, 181, 48, 0.3);
