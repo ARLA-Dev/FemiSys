@@ -86,10 +86,17 @@ strong {
   background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
 }
 
+.theme-bgy {
+  background: linear-gradient(-135deg, #dfdb00 0%, #d8d53a 100%);
+}
+
 .theme-bg2 {
   background: linear-gradient(-135deg, #899FD4 0%, #A389D4 100%);
 }
 
+.color-m {
+  color: #01a9ac;
+}
 /* ==========  card css start  =========== */
 .anim-rotate {
   -webkit-animation: anim-rotate 1s linear infinite;
@@ -10523,6 +10530,26 @@ div.code-toolbar > .toolbar span:hover {
 textarea{
   min-height: 43.5px;
   resize: vertical;
+}
+
+.btn-p-g{
+  border-radius: 15px;
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+.btn-p-g:hover{
+  color: #323031 !important;
+}
+
+.btn-p-e{
+  border-radius: 15px;
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+.btn-p-e:hover{
+  color: #323031 !important;
 }
 
 @-webkit-keyframes pulse {

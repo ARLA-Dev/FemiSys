@@ -134,7 +134,7 @@
                         <label style="color: transparent !important;">Editar Paciente</label> <br>
                         <div class="mb-3 input-group"
                           style="display: flex; align-items: center; justify-content: right;  background-color: transparent !important;">
-                          <button type="button" class="btn btn-warning"><i class="fa fa-save"></i>Editar Paciente</button>
+                          <button type="button" class="btn theme-bgy text-white btn-p-e"><i class="fa fa-save"></i>Editar Paciente</button>
                         </div>
                       </div>
                     </div>
@@ -157,13 +157,16 @@
                     </div>
 
                     <div class="col-md-6 mt-3">
-                      <div class="form-group">
-                        <label style="color: transparent !important;">Agregar Consulta</label> <br>
-                        <div class="mb-3 input-group"
+
+                      <form action="crearConsulta.html" method="get">
+                        <div class="form-group">
+                          <label style="color: transparent !important;">Agregar Consulta</label> <br>
+                          <div class="mb-3 input-group"
                           style="display: flex; align-items: center; justify-content: right;  background-color: transparent !important;">
-                          <button type="button" class="btn btn-success"><i class="fa fa-plus"></i>Agregar Consulta</button>
+                          <button type="submit" class="btn theme-bg text-white btn-p-g"><i class="fa fa-plus"></i>Agregar Consulta</button>
                         </div>
                       </div>
+                    </form>
                     </div>
                     <!--FIN SEGUNDA FILA-->
                    
@@ -180,9 +183,7 @@
                               <th>Fecha<br></th>
                               <th>Peso</th>
                               <th>Nota Evolutiva</th>
-                              <th>Recipe</th>
-                              <th>Indicaciones</th>
-                              <th>Acciones</th>
+                              <th>Documentos</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -191,11 +192,8 @@
                               <td>2022-01-01</td>
                               <td>30KG</td>
                               <td>ABC</td>
-                              <td>DEF</td>
-                              <td>GHI</td>
                               <td>
-                                <a class="see" href="consulta.html" style="cursor:pointer"><i class="material-icons">&#xe8f4;</i></a>
-                                <a class="delete" style="cursor:pointer"><i class="material-icons">&#xE872;</i></a>
+                                <a class="see" href="#" style="cursor:pointer"><i class="material-icons color-m">&#xe8f4;</i></a>
                               </td>
                             </tr>
                           </tbody>
