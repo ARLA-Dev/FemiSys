@@ -42,103 +42,75 @@
 
           <div class="main-body">
             <div class="page-wrapper">
+
+              <div class="row">
+
+                
+                <div class="col-4"></div>
+                <div class="col-4">
+                  <div class="card">
+
+                    <div class="card-block border-bottom">
+                      <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                          <img src="assets/images/user/avatar-5.jpg" alt="foto-paciente">
+                        </div>
+                        <div class="col text-right">
+                          <h3>Rora Orutega</h3>
+                          <h5 class="text-c-blue mb-0">Cédula: <span class="text-muted">26976713</span></h5>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card-block">
+
+                      <div class="row align-items-center justify-content-center card-active">
+                        <div class="col-6">
+                          <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Esta es mi consulta N°</span>0</h6>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4"></div>
+                
+              </div>
+
               <div class="row">
                 <div class="col">
                   <div class="card">
                     <div class="card-body">
+                      <h5>Datos de la Consulta</h5>
+                      <hr>
                       <div class="row">
                         
+                        <div class="col-md-6">    
+                          <div class="form-group">
+                              <label for="i_fcon" class="form-label">Fecha de la Consulta</label>
+                              <input type="date" id="i_fcon" class="form-control" required />
+                          </div>
+                        </div>
                        
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="i_cedula" class="form-label">Cédula</label>
-                            <input placeholder="Cédula..." value="" type="text" id="i_cedula" class="form-control" required />
+                            <label for="i_peso" class="form-label">Peso</label>
+                            <input placeholder="Peso..." value="" type="number" id="i_peso" class="form-control" required />
                           </div>
                         </div>
 
-                        <div class="col-md-6">    
+                        <div class="col-md-12">
                           <div class="form-group">
-                              <label for="i_fnac" class="form-label">Fecha de Nacimiento</label>
-                              <input type="date" id="i_fnac" class="form-control" required />
+                            <label for="ta_antecedentes" class="form-label">Antecedentes</label>
+                            <textarea rows="1" id="ta_antecedentes" class="form-control" placeholder="Antecedentes..."></textarea>
                           </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="i_nombre" class="form-label">Nombre</label>
-                              <input placeholder="Nombre..." value="" type="text" id="i_nombre" class="form-control" required />
-                            </div>
-                          </div>
                           
-                          <div class="col-md-6">    
-                            <div class="form-group">
-                                <label for="i_apellido" class="form-label">Apellido</label>
-                                <input placeholder="Apellido..." value="" type="text" id="i_apellido" class="form-control" required />
-                            </div>
-                          </div>
-                         
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="s_nacionalidad" class="form-label">Nacionalidad</label>
-                              <select id="s_nacionalidad" class="form-control">
-                                <option>Venezolano(a)</option>
-                                <option>Extranjero(a)</option>
-                              </select>
-                            </div>
-                          </div>
-                          
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="i_lnac" class="form-label">Lugar de Nacimiento</label>
-                              <input placeholder="Lugar de Nacimiento..." value="" type="text" id="i_lnac" class="form-control" required />
-                            </div>
-                          </div>
-
-                          <div class="col-md-6">    
-                            <div class="form-group">
-                                <label for="i_direccion" class="form-label">Dirección</label>
-                                <input placeholder="Dirección..." value="" type="text" id="i_direccion" class="form-control" required />
-                            </div>
-                          </div>
-                         
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="i_telefono" class="form-label">Télefono</label>
-                              <input placeholder="Télefono..." value="" type="tel" id="i_telefono" class="form-control" required />
-                            </div>
-                          </div>
-                          
-                          <div class="col-md-6">    
-                            <div class="form-group">
-                                <label for="i_direccion" class="form-label">Correo Electronico</label>
-                                <input placeholder="Email..." value="" type="mail" id="i_email" class="form-control" />
-                            </div>
-                          </div>
-
-                          <div class="col-md-6">    
-                            <div class="form-group">
-                              <label for="s_edocivil" class="form-label">Estado Civil</label>
-                              <select id="s_edocivil" class="form-control">
-                                <option>Soltero(a)</option>
-                                <option>Casado(a)</option>
-                                <option>Viudo(a)</option>
-                                <option>Divorciado(a)</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6">    
-                            <div class="form-group">
-                                <label for="ta_antecedentes" class="form-label">Antecedentes</label>
-                                <textarea rows="1" id="ta_antecedentes" class="form-control" placeholder="Antecedentes..."></textarea>
-                            </div>
-                          </div>
-                         
-                          <div class="boton-ajustes col-md-12 text-right">
-                            <button type="button" class="btn theme-bg text-white btn-p-g m-0">
-                              Guardar
-                            </button>
-                          </div>
+                        <div class="boton-ajustes col-md-12 text-right">
+                          <button type="button" class="btn theme-bg text-white btn-p-g m-0">
+                            Guardar
+                          </button>
+                        </div>
 
                         
                         </div>
