@@ -94,7 +94,14 @@
                                 Cosa Final
                               </td>
                               <td>          
-                                <a class="see" href="consulta.html" style="cursor:pointer"><i class="material-icons color-m">&#xe8f4;</i></a>
+                                <a 
+                                  class="see" 
+                                  style="cursor:pointer" 
+                                  data-toggle="modal" 
+                                  data-target="#modalDocumentos"
+                                 
+                                >
+                                <i class="material-icons color-m">&#xe8f4;</i></a>
                               </td>
                             </tr>
                           </tbody>
@@ -114,6 +121,54 @@
       
     </div>
     <!-- FIN CONTENEDOR PRINCIPAL -->
+
+    <div class="modal" tabindex="-1" id="modalDocumentos">
+      <div class="modal-body">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Documentos</h5>
+            <button type="button" class="btn bg-transparent border-0" data-dismiss="modal"><i class="fa fa-times" style="font-size: 30px; color: #B22222;"></i></button>
+          </div>
+
+          <div class="modal-body container text-center">
+
+            <div class="row">
+
+              <div class="col-6" >
+
+                <div class="card container text-center" style="border: 1px solid black !important;">
+
+                  <div class="card-body">
+
+                    <h5 class="card-title">Récipe</h5>
+                    <p>contenido</p>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-6" >
+
+                <div class="card container text-center" style="border: 1px solid black !important;">
+
+                  <div class="card-body">
+
+                    <h5 class="card-title">Indicaciones</h5>
+                    <p>contenido</p>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer d-flex flex-0 justify-content-center align-content-center">
+            <button type="button" class="btn theme-bgy text-white btn-p-e">Imprimir</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- JS REQUERIDO -->
     <script src="assets/js/vendor-all.min.js"></script>

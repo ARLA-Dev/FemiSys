@@ -91,7 +91,7 @@ strong {
 }
 
 .theme-bg2 {
-  background: linear-gradient(-135deg, #899FD4 0%, #A389D4 100%);
+  background: linear-gradient(-135deg, #c75252 0%, #c72828 100%);
 }
 
 .color-m {
@@ -10550,6 +10550,15 @@ textarea{
 
 .btn-p-e:hover{
   color: #323031 !important;
+}
+
+.pell-actionbar{
+  background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+}
+
+.pell-button{
+  color: white;
+  font-weight: bolder;
 }
 
 @-webkit-keyframes pulse {
