@@ -9,6 +9,7 @@
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" /> <!-- Favicon icon -->
     <link rel="stylesheet" href="assets/fonts/fontawesome/css/fontawesome-all.min.css" /> <!-- fontawesome icon -->
     <link rel="stylesheet" href="assets/plugins/animation/css/animate.min.css" /> <!-- animation css -->
+    <link rel="stylesheet" href="assets/plugins/pell/pell.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" /> <!-- vendor css -->
   </head>
 
@@ -105,6 +106,26 @@
                             <textarea rows="1" id="ta_antecedentes" class="form-control" placeholder="Antecedentes..."></textarea>
                           </div>
                         </div>
+
+
+                        <!--Editor: https://jaredreich.com/pell/-->
+
+                        <div class="col-md-6">
+
+                          <label  class="form-label mb-2">Recipe</label>
+                          <div id="editor-recipe"></div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                        
+                          <label class="form-label mb-2">Indicaciones</label>
+                          <div id="editor-indicaciones"></div>
+                          
+                        </div>
+
+                        <!--Fin Editor-->
                           
                         <div class="boton-ajustes col-md-12 text-right">
                           <button type="button" class="btn theme-bg text-white btn-p-g m-0">
@@ -135,7 +156,24 @@
     </script>
     <script src="assets/js/barra_navegacion.js"></script>
     <script src="assets/js/barra_header.js"></script>
-    <script src="assets/js/ajustes.js"></script>
+    <script src="assets/plugins/pell/pell.min.js"></script>
     <!-- FIN JS REQUERIDO -->
+
+    <script>
+      const pell = window.pell;
+      const pell2 = window.pell;
+      const editorR = document.getElementById("editor-recipe");
+      const editorI = document.getElementById("editor-indicaciones");
+
+      pell.init({
+        element: editorR,
+        actions: ['bold', 'italic', 'olist', 'ulist']
+      })
+
+      pell2.init({
+        element: editorI,
+        actions: ['bold', 'italic',  'olist', 'ulist']
+      })
+    </script>
   </body>
 </html>
