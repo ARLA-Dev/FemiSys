@@ -1,13 +1,13 @@
-package com.Arlacorp.FemiSys;
+package com.arlainc.femisys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FemiSysApplication {
+public class FemisysApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FemiSysApplication.class, args);
+		SpringApplication.run(FemisysApplication.class, args);
 	}
 
 }
