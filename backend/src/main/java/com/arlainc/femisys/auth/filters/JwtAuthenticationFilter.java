@@ -1,5 +1,6 @@
 package com.arlainc.femisys.auth.filters;
 
+import com.arlainc.femisys.auth.TokenConfig;
 import com.arlainc.femisys.models.Usuario;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import static com.arlainc.femisys.auth.TokenConfig.*;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -58,10 +60,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException{
         String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal())
                 .getUsername();
-        String originalInput = "Este_es_el_token_secreto." + username;
+        String originalInput = SECRET_KEY+"."+ username;
         String token = Base64.getEncoder().encodeToString(originalInput.getBytes());
 
-        response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader(HEADER_AUTHORIZATION, PREFIX_TOKEN + token);
         Map<String, Object> body = new HashMap<>();
         body.put("token", token);
         body.put("message", String.format("Hola %s, has iniciado sesion con exito!", username));

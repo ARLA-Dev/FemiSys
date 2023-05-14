@@ -1,6 +1,7 @@
 package com.arlainc.femisys.auth;
 
 import com.arlainc.femisys.auth.filters.JwtAuthenticationFilter;
+import com.arlainc.femisys.auth.filters.JwtValidationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,7 @@ public class SpringSecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
+                .addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))
                 .csrf(config -> config.disable())
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
