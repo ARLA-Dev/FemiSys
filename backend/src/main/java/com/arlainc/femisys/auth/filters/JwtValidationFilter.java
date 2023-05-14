@@ -47,9 +47,7 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
 
         if(SECRET_KEY.equals(secret)){
 
-            List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null,  authorities);
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null,  null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(request, response);
         }

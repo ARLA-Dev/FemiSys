@@ -1,22 +1,17 @@
 package com.arlainc.femisys.services;
 
 import com.arlainc.femisys.models.Usuario;
-import com.arlainc.femisys.repositories.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class UsuarioService {
+public interface UsuarioService {
 
-    @Autowired
-    UsuarioRepository usuarioRepository;
+    List<Usuario> findAll();
 
-    public List<Usuario> obtenerTodos() {
+    Optional<Usuario> findById(Long id);
 
-        return usuarioRepository.findAll();
+    Usuario save(Usuario usuario);
 
-    }
 
 }
