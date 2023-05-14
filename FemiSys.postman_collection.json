@@ -10,14 +10,7 @@
 			"name": "Usuarios",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "RXN0ZV9lc19lbF90b2tlbl9zZWNyZXRvLmFkbWlu",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -80,7 +73,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"12345\"\r\n}",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"arla\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,7 +102,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "RXN0ZV9lc19lbF90b2tlbl9zZWNyZXRvLmFkbWlu",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NDE4OTQyN30.p4aQwJR-shpkUka6WpOtKTMzu51K3O8pMB_QUi30QUE",
 							"type": "string"
 						}
 					]

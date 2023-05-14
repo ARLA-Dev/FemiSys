@@ -1,22 +1,22 @@
 package com.arlainc.femisys.auth.filters;
 
-import com.arlainc.femisys.auth.TokenConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import java.io.IOException;
 import java.util.*;
 
-import static com.arlainc.femisys.auth.TokenConfig.*;
+import static com.arlainc.femisys.auth.TokenJWTConfig.*;
 
 public class JwtValidationFilter extends BasicAuthenticationFilter {
 
@@ -38,21 +38,24 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
         }
 
         String token = header.replace(PREFIX_TOKEN, "");
-        byte[] tokenDecodeBytes = Base64.getDecoder().decode(token);
-        String tokenDecode = new String(tokenDecodeBytes);
 
-        String[] tokenArr = tokenDecode.split("\\.");
-        String secret = tokenArr[0];
-        String username = tokenArr[1];
+        try{
 
-        if(SECRET_KEY.equals(secret)){
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(SECRET_KEY)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            String username = claims.getSubject();
 
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null,  null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(request, response);
         }
-        else{
+        catch(JwtException e){
             Map<String, String> body = new HashMap<>();
+            body.put("error", e.getMessage());
             body.put("message", "Su token no es válido");
             response.getWriter().write(new ObjectMapper().writeValueAsString(body));
             response.setStatus(403);

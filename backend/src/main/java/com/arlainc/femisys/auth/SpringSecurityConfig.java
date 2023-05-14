@@ -30,7 +30,6 @@ public class SpringSecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         return http.authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/usuarios").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
