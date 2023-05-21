@@ -41,7 +41,7 @@ barra_header.innerHTML =
               />
               <span>Yuleima Pérez</span>
 
-              <a href="login.html" class="dud-logout" title="Logout">
+              <a href="javascript:void(0)" class="dud-logout" title="Logout" id="logout_btn" onclick="logout()">
                   <i class="feather icon-log-out"></i>
               </a>
                 </div>

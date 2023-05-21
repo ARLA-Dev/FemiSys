@@ -13,5 +13,7 @@ public interface UsuarioService {
 
     Usuario save(Usuario usuario);
 
+    Optional<Usuario> findByUsername(String username);
 
+    Optional<Usuario> getUserByUsername(String username);
 }

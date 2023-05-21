@@ -35,4 +35,23 @@ public class UsuarioServiceImpl implements  UsuarioService {
         usuario.setRespuesta(passwordEncoder.encode(usuario.getRespuesta()));
         return repository.save(usuario);
     }
+
+    @Override
+    public Optional<Usuario> findByUsername(String username) {
+        return repository.findByUsername(username);
+    }
+
+    @Override
+    public Optional<Usuario> getUserByUsername(String username) {
+        return repository.findByUsername(username)
+                .map(usuario -> {
+                    Usuario usuarioReducido = new Usuario();
+                    usuarioReducido.setId(usuario.getId());
+                    usuarioReducido.setPregunta(usuario.getPregunta());
+                    usuarioReducido.setUsername(usuario.getUsername());
+                    return usuarioReducido;
+                });
+    }
+
+
 }
