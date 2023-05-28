@@ -14,6 +14,12 @@
   </head>
 
   <body>
+    <!--Loader -->
+    <div class="loader_bg">
+      <div class="loader"></div>
+    </div>
+    <!--FIN Loader -->
+    
     <!--BARRA DE NAVEGACIÓN -->
     <div id="barra_navegacion"></div>
     <!--FIN BARRA DE NAVEGACIÓN -->
@@ -175,6 +181,12 @@
         element: editorI,
         actions: ['bold', 'italic',  'olist', 'ulist']
       })
+    </script>
+    
+    <script>
+      setTimeout(function(){
+        $('.loader_bg').fadeToggle();
+      }, 1000);
     </script>
   </body>
 </html>

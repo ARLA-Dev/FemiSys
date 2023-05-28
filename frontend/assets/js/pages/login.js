@@ -3,6 +3,7 @@ let login_btn = document.getElementById("login_btn");
 login_btn.addEventListener("click", function (event) {
   
   const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value; 
 
   fetch("http://localhost:8080/login", {
     method: "POST",
@@ -14,6 +15,7 @@ login_btn.addEventListener("click", function (event) {
   })
   
     .then((response) => {
+
       if (response.ok) {
         return response.json(); // Parsea la respuesta JSON
       } else {

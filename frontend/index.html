@@ -12,9 +12,16 @@
     <link rel="stylesheet" href="assets/plugins/chart-morris/css/morris.css" /> <!-- morris css -->
     <link rel="stylesheet" href="assets/css/style.css" />  <!-- main style css -->
     <link rel="stylesheet" href="assets/css/index.css" />  <!-- main style css -->
+    <link rel="stylesheet" href="assets/css/loader.css">
   </head>
 
   <body>
+    <!--Loader -->
+    <div class="loader_bg">
+      <div class="loader"></div>
+    </div>
+    <!--FIN Loader -->
+
     <!--BARRA DE NAVEGACIÓN -->
     <div id="barra_navegacion"></div>
     <!--FIN BARRA DE NAVEGACIÓN -->
@@ -167,11 +174,15 @@
     <script src="assets/plugins/chart-morris/js/raphael.min.js"></script>
     <script src="assets/plugins/chart-morris/js/morris.min.js"></script>
     <script src="assets/js/pages/chart-morris-custom.js"></script>
-    <script>
-      var pagina = "index";
-    </script>
+    <script> var pagina = "index";</script>
     <script src="assets/js/barra_navegacion.js"></script>
     <script src="assets/js/barra_header.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      setTimeout(function(){
+        $('.loader_bg').fadeToggle();
+      }, 1000);
+    </script>
     <!-- FIN JS REQUERIDO -->
   </body>
 </html>

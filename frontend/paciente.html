@@ -10,9 +10,16 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome/css/fontawesome-all.min.css" /> <!-- fontawesome icon -->
     <link rel="stylesheet" href="assets/plugins/animation/css/animate.min.css" /> <!-- animation css -->
     <link rel="stylesheet" href="assets/css/style.css" /> <!-- vendor css -->
+    <link rel="stylesheet" href="assets/css/loader.css">
   </head>
 
   <body>
+    <!--Loader -->
+    <div class="loader_bg">
+      <div class="loader"></div>
+    </div>
+    <!--FIN Loader -->
+    
     <!--BARRA DE NAVEGACIÓN -->
     <div id="barra_navegacion"></div>
     <!--FIN BARRA DE NAVEGACIÓN -->
@@ -277,6 +284,11 @@
     <script>var pagina = "paciente";</script>
     <script src="assets/js/barra_navegacion.js"></script>
     <script src="assets/js/barra_header.js"></script>
+    <script>
+      setTimeout(function(){
+        $('.loader_bg').fadeToggle();
+      }, 1000);
+    </script>
     <!-- FIN JS REQUERIDO -->
     
   </body>

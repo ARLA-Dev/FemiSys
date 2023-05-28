@@ -10561,6 +10561,47 @@ textarea{
   font-weight: bolder;
 }
 
+.pagination-container-wrapper {
+  max-width: 100%; /* Establece el ancho máximo deseado */
+  overflow-x: auto; /* Agrega desbordamiento horizontal */
+  width: 100%;
+  text-align: center;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  flex-wrap: wrap; /* Permite que las páginas se envuelvan */
+  background-color: #000;
+}
+
+.pagination > li a{
+  color: #01A9AC;
+  border: none;
+  font-family: inherit;
+  font-size: 15px !important;
+  font-weight: bold;
+}
+
+.pagination > li a:active{
+  background-color: #01A9AC;
+  color: white;
+}
+
+.pagination > li a:hover{
+  color: #01A9AC;
+  color: black;
+}
+
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #01A9AC;
+}
+
+
 @-webkit-keyframes pulse {
 	0% {
 		-webkit-box-shadow: 0 0 0 0 rgba(121, 181, 48, 0.3);
