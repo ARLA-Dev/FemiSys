@@ -72,7 +72,7 @@
               
                     <!--FIN PRIMERA FILA-->
               
-                    <!--TABLA DE PACIENTES-->
+                    <!--TABLA DE CONSULTAS-->
               
                     <div class="col-md-12">
                       <div class="table-responsive">
@@ -84,41 +84,23 @@
                               <th>Nombre Completo</th>
                               <th>Peso</th>
                               <th>Fecha de la Consulta<br></th>
-                              <th>Nota Evolutiva</th>
                               <th>Documentos</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>123456789</td>
-                              <td>María Pérez</td>
-                              <td>80kg</td>
-                              <td>1990-01-18</td>
-                              <td>
-                                Una Cosa
-                                Otra Cosa
-                                Cosa Final
-                              </td>
-                              <td>          
-                                <a 
-                                  class="see" 
-                                  style="cursor:pointer" 
-                                  data-toggle="modal" 
-                                  data-target="#modalDocumentos"
-                                 
-                                >
-                                <i class="material-icons color-m">&#xe8f4;</i></a>
-                              </td>
-                            </tr>
-                          </tbody>
+                          <tbody></tbody>
                         </table>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!--FIN TABLA DE PACIENTES-->
+                <!--FIN TABLA DE CONSULTAS-->
+
+                <div class="pagination-container-wrapper mt-4">
+                  <div class="pagination-container">
+                    <ul class="pagination pagination-sm flex-wrap justify-content-center align-content-center"></ul>
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -185,6 +167,7 @@
     <script>var pagina = "consultas";</script>
     <script src="assets/js/barra_navegacion.js"></script>
     <script src="assets/js/barra_header.js"></script>
+    <script src="assets/js/pages/consultas.js"></script>
     <script>
       setTimeout(function(){
         $('.loader_bg').fadeToggle();

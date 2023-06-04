@@ -1,28 +1,66 @@
 {
 	"info": {
-		"_postman_id": "6eb415eb-3535-40a1-a533-a9e71faf0d5e",
+		"_postman_id": "ae3d3769-6337-45e4-b18f-624561a78e88",
 		"name": "FemiSys",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26828048"
+		"_exporter_id": "21208116"
 	},
 	"item": [
 		{
 			"name": "Usuarios",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NDc4NjU1OX0.N4qn1Q3Qh5Lyo3HDqWzgJxnmV4x7xa-W34p4kSTG_fo",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/usuarios",
+					"raw": "http://localhost:8080/api/usuarios",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
 						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultas",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NTk4ODcyOX0.PvFrsi2GXP00J5bwGjaHuSKCb8fQ8j6oMkF-QAOD-jA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultas"
 					]
 				}
 			},
@@ -102,7 +140,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NDE4OTQyN30.p4aQwJR-shpkUka6WpOtKTMzu51K3O8pMB_QUi30QUE",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NDc4NjU1OX0.N4qn1Q3Qh5Lyo3HDqWzgJxnmV4x7xa-W34p4kSTG_fo",
 							"type": "string"
 						}
 					]
@@ -110,15 +148,96 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/usuarios/2",
+					"raw": "http://localhost:8080/api/usuarios/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
 						"usuarios",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios By Username",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/usuario/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"usuario",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Usuarios - recuperar clave",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/recuperar_clave/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"recuperar_clave",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pacientes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NTk4ODQwM30.8YbGgWv1mnUaizowTPuDG67IHtp4_XduZe0bpOnGk2s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pacientes"
 					]
 				}
 			},

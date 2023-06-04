@@ -1,7 +1,7 @@
 // Variables para la paginación
 const table = document.querySelector('.table');
 const tableBody = table.querySelector('tbody');
-const itemsPerPage = 50;
+const itemsPerPage = 25;
 let currentPage = 1;
 let originalData = [];
 let currentData = [];
