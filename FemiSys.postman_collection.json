@@ -214,6 +214,40 @@
 			"response": []
 		},
 		{
+			"name": "Recuperar - Contraseña",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"respuesta\": \"12345\",\r\n  \"nuevaClave\": \"171821\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/recuperar_clave/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"recuperar_clave",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Pacientes",
 			"request": {
 				"auth": {

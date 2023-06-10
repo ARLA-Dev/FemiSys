@@ -2,6 +2,7 @@ package com.arlainc.femisys.services;
 
 import com.arlainc.femisys.models.Usuario;
 import com.arlainc.femisys.repositories.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,22 @@ public class UsuarioServiceImpl implements  UsuarioService {
                 });
     }
 
+    private boolean verificarRespuesta(Usuario usuario, String respuesta) {
+        return passwordEncoder.matches(respuesta, usuario.getRespuesta());
+    }
 
+    @Transactional
+    @Override
+    public boolean recuperarClave(String username, String respuesta, String nuevaClave) {
+        Optional<Usuario> usuarioOptional = findByUsername(username);
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+            if (verificarRespuesta(usuario, respuesta)) {
+                String claveEncriptada = passwordEncoder.encode(nuevaClave);
+                repository.actualizarClave(username, claveEncriptada);
+                return true;
+            }
+        }
+        return false;
+    }
 }

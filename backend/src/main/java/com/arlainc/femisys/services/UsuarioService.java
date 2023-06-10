@@ -16,4 +16,6 @@ public interface UsuarioService {
     Optional<Usuario> findByUsername(String username);
 
     Optional<Usuario> getUserByUsername(String username);
+
+    boolean recuperarClave(String username, String respuesta, String nuevaClave);
 }

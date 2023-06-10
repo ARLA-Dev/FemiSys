@@ -33,3 +33,37 @@ lupa.addEventListener('click', function (event) {
       console.error(error);
     });
 });
+
+const recuperar_btn = document.getElementById('recuperar_btn');
+
+recuperar_btn.addEventListener('click', function (event) {
+  const username = document.getElementById('username').value;
+  const respuesta = document.getElementById('respuesta').value;
+  const nuevaClave = document.getElementById('password').value;
+
+  fetch('http://localhost:8080/api/usuarios/recuperar_clave/' + username, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      respuesta,
+      nuevaClave,
+    }),
+    mode: 'cors', // Agrega este encabezado
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert('La contraseña ha sido cambiada correctamente');
+      } else {
+        throw new Error('Error en la solicitud');
+     }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
+
+
+
+

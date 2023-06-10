@@ -3,10 +3,12 @@ package com.arlainc.femisys.controllers;
 import com.arlainc.femisys.models.Usuario;
 import com.arlainc.femisys.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -59,5 +61,15 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarioCreado);
     }
 
+    @PutMapping("api/usuarios/recuperar_clave/{username}")
+    public ResponseEntity<String> recuperarClave(@PathVariable(value = "username") String username, @RequestBody Map<String, String> request) {
+        String respuesta = request.get("respuesta");
+        String nuevaClave = request.get("nuevaClave");
+
+        if (usuarioService.recuperarClave(username, respuesta, nuevaClave)) {
+            return ResponseEntity.ok("Contraseña actualizada correctamente");
+        }
+        return ResponseEntity.badRequest().body("No se pudo actualizar la contraseña");
+    }
 }
 
