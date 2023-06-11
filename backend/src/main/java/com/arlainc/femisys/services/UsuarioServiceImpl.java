@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -67,6 +68,28 @@ public class UsuarioServiceImpl implements  UsuarioService {
             if (verificarRespuesta(usuario, respuesta)) {
                 String claveEncriptada = passwordEncoder.encode(nuevaClave);
                 repository.actualizarClave(username, claveEncriptada);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Transactional
+    @Override
+    public boolean modificarUsuarioActual(String username, Map<String, String> request) {
+        Optional<Usuario> usuarioOptional = findByUsername(username);
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+            String passwordOld = request.get("password_old");
+            String pregunta = request.get("pregunta");
+            String respuesta = request.get("respuesta");
+            String password = request.get("password");
+
+            if (passwordEncoder.matches(passwordOld, usuario.getPassword())) {
+                usuario.setPregunta(pregunta);
+                usuario.setRespuesta(passwordEncoder.encode(respuesta));
+                usuario.setPassword(passwordEncoder.encode(password));
+                repository.save(usuario);
                 return true;
             }
         }

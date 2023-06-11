@@ -94,7 +94,6 @@ public class UsuarioController {
         }
     }
 
-
     private String extractUsernameFromToken(String token) {
 
         String username = Jwts.parserBuilder()
@@ -105,6 +104,19 @@ public class UsuarioController {
                 .getSubject();
 
         return username;
+    }
+
+    @PutMapping("api/usuarios/current")
+    public ResponseEntity<String> modificarUsuarioActual(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Map<String, String> request) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        String username = extractUsernameFromToken(token);
+        boolean resultado = usuarioService.modificarUsuarioActual(username, request);
+
+        if (resultado) {
+            return ResponseEntity.ok("Usuario actual modificado correctamente");
+        } else {
+            return ResponseEntity.badRequest().body("La contraseña antigua no coincide");
+        }
     }
 }
 

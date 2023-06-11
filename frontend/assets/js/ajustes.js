@@ -46,4 +46,45 @@ fetch('http://localhost:8080/api/usuarios/current', {
     console.error('Error:', error);
   });
 
+  const btnGuardar = document.getElementById("btnGuardar")
+
+  btnGuardar.addEventListener("click", function() {
+
+    const pregunta = selectElement.value;
+    const respuesta = document.getElementById("respuesta").value;
+    const password_old = document.getElementById("o_pass").value;
+    const password_new = document.getElementById('n_pass').value;
+    const useOldPassword = document.getElementById('ck').checked;
+  
+    // Verificar si se debe utilizar la contraseña antigua o la nueva contraseña
+    const password = useOldPassword ? password_new : password_old;
+
+    
+    fetch('http://localhost:8080/api/usuarios/current', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+    },
+    body: JSON.stringify({
+      password_old,
+      pregunta,
+      respuesta,
+      password
+    }),
+    mode: 'cors', // Agrega este encabezado
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert('Usuario modificado correctamente');
+      } else {
+        throw new Error('Error en la solicitud');
+     }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  });
+  
+
   
