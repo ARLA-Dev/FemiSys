@@ -44,13 +44,26 @@ function renderPage() {
     row.appendChild(fechaCell);
 
     // Crear las celdas para las acciones
-    const accionesCell = document.createElement('td');
+    const accionNE = document.createElement('td');
     const seeLink = document.createElement('a');
     seeLink.className = 'see';
-    seeLink.href = 'consulta.html';
+    seeLink.id = 'see_ne'
+    seeLink.href = '#';
     seeLink.style.cursor = 'pointer';
     seeLink.innerHTML = '<i class="material-icons color-m">&#xe8f4;</i>';
-    accionesCell.appendChild(seeLink);
+    accionNE.appendChild(seeLink);
+  
+    // Agregar la celda de acciones a la fila
+    row.appendChild(accionNE);
+
+    const accionesCell = document.createElement('td');
+    const seeLink2 = document.createElement('a');
+    seeLink2.className = 'see';
+    seeLink2.id = 'see'
+    seeLink2.href = '#';
+    seeLink2.style.cursor = 'pointer';
+    seeLink2.innerHTML = '<i class="material-icons color-m">&#xe8f4;</i>';
+    accionesCell.appendChild(seeLink2);
   
     // Agregar la celda de acciones a la fila
     row.appendChild(accionesCell);

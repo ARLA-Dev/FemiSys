@@ -37,6 +37,37 @@
 			"response": []
 		},
 		{
+			"name": "Usuario Actual",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NjU4NDQwOX0.WYfU3-prL3SWbxbqI3WG95k2KRr5z_Y-0n_aEnhMmEg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/current",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Consultas",
 			"request": {
 				"auth": {
@@ -111,7 +142,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"arla\"\r\n}",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"1718\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

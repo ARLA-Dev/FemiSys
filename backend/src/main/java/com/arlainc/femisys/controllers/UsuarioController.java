@@ -2,14 +2,18 @@ package com.arlainc.femisys.controllers;
 
 import com.arlainc.femisys.models.Usuario;
 import com.arlainc.femisys.services.UsuarioServiceImpl;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.arlainc.femisys.auth.TokenJWTConfig.SECRET_KEY;
 
 @RestController
 public class UsuarioController {
@@ -70,6 +74,37 @@ public class UsuarioController {
             return ResponseEntity.ok("Contraseña actualizada correctamente");
         }
         return ResponseEntity.badRequest().body("No se pudo actualizar la contraseña");
+    }
+
+    @GetMapping("api/usuarios/current")
+    public ResponseEntity<Map<String, Object>> obtenerUsuarioActual(@RequestHeader("Authorization") String authorizationHeader) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        String username = extractUsernameFromToken(token);
+        Optional<Usuario> usuario = usuarioService.findByUsername(username);
+
+        if (usuario.isPresent()) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("username", usuario.get().getUsername());
+            response.put("nombre", usuario.get().getNombre());
+            response.put("pregunta", usuario.get().getPregunta());
+
+            return ResponseEntity.ok().body(response);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    private String extractUsernameFromToken(String token) {
+
+        String username = Jwts.parserBuilder()
+                .setSigningKey(SECRET_KEY)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+
+        return username;
     }
 }
 

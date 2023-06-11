@@ -35,11 +35,11 @@ barra_header.innerHTML =
             <div class="pro-head">
 
               <img
-                src="assets/images/user/avatar-1.jpg"
+                src="assets/images/user/avatar-${ sessionStorage.getItem("nombre") == "Arla Inc Tech" ? "2" : "1"}.jpg"
                 class="img-radius"
                 alt="User-Profile-Image"
               />
-              <span>Yuleima Pérez</span>
+              <span>${sessionStorage.getItem('nombre')}</span>
 
               <a href="javascript:void(0)" class="dud-logout" title="Logout" id="logout_btn" onclick="logout()">
                   <i class="feather icon-log-out"></i>
