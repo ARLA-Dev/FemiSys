@@ -3,6 +3,8 @@ package com.arlainc.femisys.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "pacientes")
 @Data
@@ -22,7 +24,7 @@ public class Paciente {
     private String telefono;
 
     @Column(name = "fecha_nacimiento")
-    private String fecha_nacimiento;
+    private Date fecha_nacimiento;
 
     @Column(name = "lugar_nacimiento")
     private String lugar_nacimiento;

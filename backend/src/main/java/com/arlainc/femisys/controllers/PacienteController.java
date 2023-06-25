@@ -6,6 +6,7 @@ import com.arlainc.femisys.services.PacienteService;
 import com.arlainc.femisys.services.PacienteServiceImpl;
 import com.arlainc.femisys.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,5 +27,11 @@ public class PacienteController {
     public ResponseEntity<List<Paciente>> obtenerPacientes() {
         List<Paciente> pacientes = pacienteService.obtenerPacientesActivos();
         return ResponseEntity.ok(pacientes);
+    }
+
+    @PostMapping("api/pacientes")
+    public ResponseEntity<Paciente> crearPaciente(@RequestBody Paciente paciente) {
+        Paciente nuevoPaciente = pacienteService.crearPaciente(paciente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPaciente);
     }
 }

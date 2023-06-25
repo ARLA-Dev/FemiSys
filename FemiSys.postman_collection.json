@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "ae3d3769-6337-45e4-b18f-624561a78e88",
+		"_postman_id": "0f639e61-037b-4646-b404-9d9cc4ee5773",
 		"name": "FemiSys",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21208116"
+		"_exporter_id": "26828048"
 	},
 	"item": [
 		{
@@ -31,6 +31,45 @@
 					"path": [
 						"api",
 						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Paciente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NzgwMjg3MX0.zR8Z-Qhpxdd9ZHqJSgyPX4_INkEh3kKgJjy2JiudNN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"paciente\": \"María de las Mercedes Barrios\",\r\n  \"cedula\": \"123456789\",\r\n  \"direccion\": \"Dirección del paciente\",\r\n  \"telefono\": \"1234567890\",\r\n  \"fecha_nacimiento\": \"2023-06-25\",\r\n  \"lugar_nacimiento\": \"BQTO\",\r\n  \"estado_civil\": \"Casada\",\r\n  \"nacionalidad\": \"Venezolana\",\r\n  \"antecedentes\": \"bastantes\",\r\n  \"sexo\": \"femenino\",\r\n  \"email\": \"correo@example.com\",\r\n  \"borrado\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pacientes"
 					]
 				}
 			},
@@ -173,7 +212,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"1718\"\r\n}",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

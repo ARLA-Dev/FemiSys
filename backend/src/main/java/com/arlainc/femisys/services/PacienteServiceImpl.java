@@ -21,4 +21,9 @@ public class PacienteServiceImpl implements PacienteService{
     public List<Paciente> obtenerPacientesActivos() {
         return pacienteRepository.findByBorrado(0);
     }
+
+    @Override
+    public Paciente crearPaciente(Paciente paciente) {
+        return pacienteRepository.save(paciente);
+    }
 }
