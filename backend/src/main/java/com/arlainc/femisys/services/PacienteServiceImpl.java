@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PacienteServiceImpl implements PacienteService{
@@ -25,5 +26,14 @@ public class PacienteServiceImpl implements PacienteService{
     @Override
     public Paciente crearPaciente(Paciente paciente) {
         return pacienteRepository.save(paciente);
+    }
+
+    @Override
+    public void marcarPacienteComoBorradoPorCedula(String cedula) {
+        Paciente paciente = pacienteRepository.findByCedula(cedula);
+        if (paciente != null) {
+            paciente.setBorrado(1);
+            pacienteRepository.save(paciente);
+        }
     }
 }

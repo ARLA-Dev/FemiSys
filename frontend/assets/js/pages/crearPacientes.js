@@ -6,15 +6,15 @@ guardarBtn.addEventListener('click', async function(event) {
   // Obtén los valores de los campos del formulario
   const cedula = document.getElementById('i_cedula').value;
   const fechaNacimiento = document.getElementById('i_fnac').value;
-  const nombre = document.getElementById('i_nombre').value;
-  const apellido = document.getElementById('i_apellido').value;
+  const nombre = document.getElementById('i_nombre').value.toUpperCase();
+  const apellido = document.getElementById('i_apellido').value.toUpperCase();
   const nacionalidad = document.getElementById('s_nacionalidad').value;
-  const lugarNacimiento = document.getElementById('i_lnac').value;
-  const direccion = document.getElementById('i_direccion').value;
+  const lugarNacimiento = document.getElementById('i_lnac').value.toUpperCase();
+  const direccion = document.getElementById('i_direccion').value.toUpperCase();
   const telefono = document.getElementById('i_telefono').value;
-  const email = document.getElementById('i_email').value;
+  const email = document.getElementById('i_email').value.toUpperCase();
   const estadoCivil = document.getElementById('s_edocivil').value;
-  const antecedentes = document.getElementById('ta_antecedentes').value;
+  const antecedentes = document.getElementById('ta_antecedentes').value.toUpperCase();
   const sexo = 'Femenino';
 
   // Crea un objeto con los datos del paciente

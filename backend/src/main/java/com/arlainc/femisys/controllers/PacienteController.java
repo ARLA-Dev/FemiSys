@@ -34,4 +34,10 @@ public class PacienteController {
         Paciente nuevoPaciente = pacienteService.crearPaciente(paciente);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPaciente);
     }
+
+    @PutMapping("api/pacientes/borrar/{cedula}")
+    public ResponseEntity<String> marcarPacienteComoBorrado(@PathVariable("cedula") String cedula) {
+        pacienteService.marcarPacienteComoBorradoPorCedula(cedula);
+        return ResponseEntity.ok("Paciente marcado como borrado");
+    }
 }

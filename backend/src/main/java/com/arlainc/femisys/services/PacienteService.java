@@ -6,5 +6,6 @@ import java.util.List;
 public interface PacienteService {
     List<Paciente> obtenerPacientesActivos();
     Paciente crearPaciente(Paciente paciente);
+    public void marcarPacienteComoBorradoPorCedula(String cedula);
 
 }

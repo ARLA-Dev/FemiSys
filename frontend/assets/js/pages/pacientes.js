@@ -38,8 +38,9 @@ function renderPage() {
     emailCell.textContent = paciente.email;
     row.appendChild(emailCell);
 
+
     const fechaNacimientoCell = document.createElement('td');
-    const fechaNacimiento = paciente.fecha_nacimiento.split(' ')[0]; // Obtiene la parte de la fecha sin la hora
+    const fechaNacimiento = paciente.fecha_nacimiento.split('T')[0]; // Obtiene la parte de la fecha sin la hora
     fechaNacimientoCell.textContent = fechaNacimiento;
     row.appendChild(fechaNacimientoCell);
 
@@ -219,3 +220,31 @@ function filtrarPacientes() {
   updatePagination();
 }
 
+function eliminarPaciente(cedula) {
+
+  const confirmar = confirm('¿Estás seguro de que deseas eliminar este paciente?');
+
+  if(confirmar){
+
+    // Realizar la llamada fetch al endpoint correspondiente para eliminar el paciente
+    fetch(`http://localhost:8080/api/pacientes/borrar/${cedula}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+      }
+    })
+    .then(response => {
+        if (response.ok) {
+          // Eliminación exitosa, puedes realizar alguna acción adicional si lo deseas
+          alert('Paciente eliminado correctamente');
+          window.location.reload();
+          
+        } else {
+          throw new Error('Error al eliminar el paciente');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+}
