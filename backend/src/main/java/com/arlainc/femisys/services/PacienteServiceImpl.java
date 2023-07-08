@@ -36,4 +36,9 @@ public class PacienteServiceImpl implements PacienteService{
             pacienteRepository.save(paciente);
         }
     }
+
+    @Override
+    public Paciente buscarPorCedula(String cedula) {
+        return pacienteRepository.findByCedula(cedula);
+    }
 }

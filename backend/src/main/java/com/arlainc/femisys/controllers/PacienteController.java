@@ -40,4 +40,14 @@ public class PacienteController {
         pacienteService.marcarPacienteComoBorradoPorCedula(cedula);
         return ResponseEntity.ok("Paciente marcado como borrado");
     }
+
+    @GetMapping("api/pacientes/{cedula}")
+    public ResponseEntity<Paciente> buscarPorCedula(@PathVariable String cedula) {
+        Paciente paciente = pacienteService.buscarPorCedula(cedula);
+        if (paciente != null) {
+            return new ResponseEntity<>(paciente, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

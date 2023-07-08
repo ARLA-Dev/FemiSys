@@ -52,7 +52,7 @@ function renderPage() {
     const accionesCell = document.createElement('td');
     const seeLink = document.createElement('a');
     seeLink.className = 'see';
-    seeLink.href = 'paciente.html';
+    seeLink.href = 'paciente.html?cedula=' + paciente.cedula;
     seeLink.style.cursor = 'pointer';
     seeLink.innerHTML = '<i class="material-icons color-m">&#xe8f4;</i>';
     accionesCell.appendChild(seeLink);
