@@ -28,7 +28,7 @@ public class Consulta {
     private String nota_evolutiva;
 
     @Column(name = "recipe")
-    private String recibe;
+    private String recipe;
 
     @Column(name = "indicaciones")
     private String indicaciones;

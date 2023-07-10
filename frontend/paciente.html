@@ -53,7 +53,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="i_cedula" class="form-label">Cédula</label>
-                        <input placeholder="Cédula..." value="" type="text" id="i_cedula" class="form-control" required />
+                        <input placeholder="Cédula..." value="" type="text" id="i_cedula" class="form-control" disabled required />
                       </div>
                     </div>
 
@@ -135,7 +135,7 @@
                         <label style="color: transparent !important;">Modificar Paciente</label> <br>
                         <div class="mb-3 input-group"
                           style="display: flex; align-items: center; justify-content: right;  background-color: transparent !important;">
-                          <button type="button" class="btn theme-bgy text-white btn-p-e"><i class="fa fa-save"></i>Modificar Paciente</button>
+                          <button type="button" id="btn_modificar" class="btn theme-bgy text-white btn-p-e"><i class="fa fa-save"></i>Modificar Paciente</button>
                         </div>
                       </div>
                     </div>
@@ -146,7 +146,7 @@
                       <div class="form-group">
                         <label>Filtrar:</label>
                         <div class="mb-3 input-group">
-                          <input aria-label="Text input with checkbox" class="form-control" placeholder="Consulta..." type="text">
+                          <input aria-label="Text input with checkbox" id="filtrado" class="form-control" placeholder="Consulta..." type="text">
                           <div class="input-group-prepend">
                             <span class="input-group-text"
                               style="width: 54.5px; text-align: center; padding: 0; display: flex; align-items: center; justify-content: center;">
@@ -171,10 +171,7 @@
                     </div>
                     <!--FIN SEGUNDA FILA-->
                    
-                    
-              
-                    <!--TABLA DE PACIENTES-->
-              
+                    <!--TABLA DE CONSULTAS-->
                     <div class="col-md-12">
                       <div class="table-responsive">
                         <table class="table table-hover text-center">
@@ -182,28 +179,12 @@
                             <tr>
                               <th>#</th>
                               <th>Fecha<br></th>
-                              <th>Peso</th>
+                              <th>Peso (KG)</th>
                               <th>Nota Evolutiva</th>
                               <th>Documentos</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>2022-01-01</td>
-                              <td>30KG</td>
-                              <td>ABC</td>
-                              <td>
-                                <a 
-                                  class="see" 
-                                  style="cursor:pointer" 
-                                  data-toggle="modal" 
-                                  data-target="#modalDocumentos"
-                                 
-                                >
-                                <i class="material-icons color-m">&#xe8f4;</i></a>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -212,7 +193,12 @@
                 </div>
 
                 <!--FIN TABLA DE PACIENTES-->
-
+                <div class="pagination-container-wrapper mt-4">
+                  <div class="pagination-container">
+                    <ul class="pagination pagination-sm flex-wrap justify-content-center align-content-center"></ul>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>

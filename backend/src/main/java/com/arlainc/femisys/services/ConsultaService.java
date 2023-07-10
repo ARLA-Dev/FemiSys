@@ -6,4 +6,6 @@ import java.util.List;
 public interface ConsultaService {
 
     List<Object[]> findAllOrderByFechaDescWithPaciente();
+
+    List<Consulta> obtenerConsultasPorCedula(String cedula);
 }

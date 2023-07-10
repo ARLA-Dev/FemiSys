@@ -5,6 +5,7 @@ import com.arlainc.femisys.services.ConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +26,10 @@ public class ConsultaController {
     public ResponseEntity<List<Object[]>> obtenerConsultasOrdenadasPorFecha() {
         List<Object[]> consultas = consultaService.findAllOrderByFechaDescWithPaciente();
         return ResponseEntity.ok(consultas);
+    }
+
+    @GetMapping("/{cedula}")
+    public List<Consulta> obtenerConsultasPorCedula(@PathVariable String cedula) {
+        return consultaService.obtenerConsultasPorCedula(cedula);
     }
 }

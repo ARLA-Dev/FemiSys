@@ -21,5 +21,10 @@ public class ConsultaServiceImpl implements ConsultaService {
     public List<Object[]> findAllOrderByFechaDescWithPaciente() {
         return consultaRepository.findAllOrderByFechaDescWithPaciente();
     }
+
+    @Override
+    public List<Consulta> obtenerConsultasPorCedula(String cedula) {
+        return consultaRepository.findByCedula(cedula);
+    }
 }
 

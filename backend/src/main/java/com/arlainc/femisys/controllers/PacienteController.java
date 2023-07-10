@@ -50,4 +50,10 @@ public class PacienteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping("api/pacientes/{cedula}")
+    public void modificarPaciente(@PathVariable String cedula, @RequestBody Paciente paciente) {
+        pacienteService.modificarPaciente(cedula, paciente);
+    }
 }
+

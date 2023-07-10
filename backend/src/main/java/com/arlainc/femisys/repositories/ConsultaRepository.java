@@ -3,6 +3,7 @@ package com.arlainc.femisys.repositories;
 import com.arlainc.femisys.models.Consulta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
             "FROM Consulta c JOIN Paciente p ON c.cedula = p.cedula " +
             "ORDER BY c.id DESC, c.fecha DESC")
     List<Object[]> findAllOrderByFechaDescWithPaciente();
+
+    @Query("SELECT c FROM Consulta c WHERE c.cedula = :cedula")
+    List<Consulta> findByCedula(@Param("cedula") String cedula);
 }
 
 

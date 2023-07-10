@@ -8,4 +8,5 @@ public interface PacienteService {
     Paciente crearPaciente(Paciente paciente);
     public void marcarPacienteComoBorradoPorCedula(String cedula);
     Paciente buscarPorCedula(String cedula);
+    void modificarPaciente(String cedula, Paciente paciente);
 }

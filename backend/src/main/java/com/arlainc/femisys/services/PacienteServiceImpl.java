@@ -41,4 +41,26 @@ public class PacienteServiceImpl implements PacienteService{
     public Paciente buscarPorCedula(String cedula) {
         return pacienteRepository.findByCedula(cedula);
     }
+
+    @Override
+    public void modificarPaciente(String cedula, Paciente paciente) {
+        Paciente pacienteExistente = buscarPorCedula(cedula);
+
+        if (pacienteExistente != null) {
+            // Actualizar los datos del paciente existente con los valores del paciente proporcionado
+            pacienteExistente.setPaciente(paciente.getPaciente());
+            pacienteExistente.setDireccion(paciente.getDireccion());
+            pacienteExistente.setTelefono(paciente.getTelefono());
+            pacienteExistente.setFecha_nacimiento(paciente.getFecha_nacimiento());
+            pacienteExistente.setLugar_nacimiento(paciente.getLugar_nacimiento());
+            pacienteExistente.setEstado_civil(paciente.getEstado_civil());
+            pacienteExistente.setNacionalidad(paciente.getNacionalidad());
+            pacienteExistente.setAntecedentes(paciente.getAntecedentes());
+            pacienteExistente.setSexo(paciente.getSexo());
+            pacienteExistente.setEmail(paciente.getEmail());
+
+            // No se actualiza el campo "borrado"
+            pacienteRepository.save(pacienteExistente);
+        }
+    }
 }
