@@ -53,8 +53,8 @@
               <div class="row">
 
                 
-                <div class="col-4"></div>
-                <div class="col-4">
+                <div class="col-3"></div>
+                <div class="col-6">
                   <div class="card">
 
                     <div class="card-block border-bottom">
@@ -63,8 +63,8 @@
                           <img src="assets/images/user/avatar-5.jpg" alt="foto-paciente">
                         </div>
                         <div class="col text-right">
-                          <h3>Rora Orutega</h3>
-                          <h5 class="text-c-blue mb-0">Cédula: <span class="text-muted">26976713</span></h5>
+                          <h3 id="h3_nombre"></h3>
+                          <h5 class="text-c-blue mb-0">Cédula: <span id="span_ci" class="text-muted"></span></h5>
                         </div>
                       </div>
                     </div>
@@ -73,14 +73,14 @@
 
                       <div class="row align-items-center justify-content-center card-active">
                         <div class="col-6">
-                          <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Esta es mi consulta N°</span>0</h6>
+                          <h6 class="text-center m-b-10" id="h6_numConsulta"><span class="text-muted m-r-5">Esta es mi consulta N°</span>0</h6>
                         </div>
                       </div>
 
                     </div>
                   </div>
                 </div>
-                <div class="col-4"></div>
+                <div class="col-3"></div>
                 
               </div>
 
@@ -108,13 +108,10 @@
 
                         <div class="col-md-12">
                           <div class="form-group">
-                            <label for="ta_antecedentes" class="form-label">Antecedentes</label>
-                            <textarea rows="1" id="ta_antecedentes" class="form-control" placeholder="Antecedentes..."></textarea>
+                            <label for="ta_notaEvolutiva" class="form-label">Nota Evolutiva</label>
+                            <textarea rows="1" id="ta_notaEvolutiva" class="form-control" placeholder="Nota evolutiva..."></textarea>
                           </div>
                         </div>
-
-
-                        <!--Editor: https://jaredreich.com/pell/-->
 
                         <div class="col-md-6">
 
@@ -139,7 +136,6 @@
                           </button>
                         </div>
 
-                        
                         </div>
                       </div>
                     </div>
@@ -147,8 +143,7 @@
                 </div>
               </div>
             </div>
-          </div>
-        
+          </div>     
       </div>
     </div>
     <!-- FIN CONTENEDOR PRINCIPAL -->
@@ -164,6 +159,7 @@
     <script src="assets/js/barra_navegacion.js"></script>
     <script src="assets/js/barra_header.js"></script>
     <script src="assets/plugins/pell/pell.min.js"></script>
+    <script src="assets/js/pages/crearConsulta.js"></script>
     <!-- FIN JS REQUERIDO -->
 
     <script>

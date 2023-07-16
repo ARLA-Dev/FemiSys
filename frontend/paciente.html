@@ -146,7 +146,7 @@
                       <div class="form-group">
                         <label>Filtrar:</label>
                         <div class="mb-3 input-group">
-                          <input aria-label="Text input with checkbox" id="filtrado" class="form-control" placeholder="Consulta..." type="text">
+                          <input aria-label="Text input with checkbox" id="filtrado" class="form-control" placeholder="Fecha de consulta..." type="text">
                           <div class="input-group-prepend">
                             <span class="input-group-text"
                               style="width: 54.5px; text-align: center; padding: 0; display: flex; align-items: center; justify-content: center;">
@@ -159,15 +159,15 @@
 
                     <div class="col-md-6 mt-3">
 
-                      <form action="crearConsulta.html" method="get">
-                        <div class="form-group">
-                          <label style="color: transparent !important;">Agregar Consulta</label> <br>
-                          <div class="mb-3 input-group"
-                          style="display: flex; align-items: center; justify-content: right;  background-color: transparent !important;">
-                          <button type="submit" class="btn theme-bg text-white btn-p-g"><i class="fa fa-plus"></i>Agregar Consulta</button>
+                      <div class="form-group">
+                        <label style="color: transparent !important;">Agregar Consulta</label> <br>
+                        <div class="mb-3 input-group" style="display: flex; align-items: center; justify-content: right; background-color: transparent !important;">
+                          <a id ="agregarConsultaEnlace" href="crearConsulta.html?cedula=" class="btn theme-bg text-white btn-p-g"><i class="fa fa-plus"></i>Agregar Consulta</a>
                         </div>
                       </div>
-                    </form>
+                      
+                      
+                      
                     </div>
                     <!--FIN SEGUNDA FILA-->
                    
@@ -197,7 +197,7 @@
                   <div class="pagination-container">
                     <ul class="pagination pagination-sm flex-wrap justify-content-center align-content-center"></ul>
                   </div>
-                </div>
+                </div>             
                 
               </div>
             </div>

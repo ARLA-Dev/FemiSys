@@ -1,19 +1,17 @@
 let currentUrl = window.location.href;
 
-if (!currentUrl.match(/\/paciente.html\?cedula=\d+/)) {window.location.href = "pacientes.html";} 
-
-else {
-
+if (!currentUrl.match(/\/paciente.html\?cedula=\d+/)) {
+  window.location.href = "pacientes.html";
+} else {
   let urlParams = new URLSearchParams(window.location.search);
   let cedula = urlParams.get("cedula");
 
   if (/^\d+$/.test(cedula) && cedula.trim() !== "") {
-
-    obtenerDatosPaciente(cedula); 
+    obtenerDatosPaciente(cedula);
     obtenerConsultasPaciente(cedula);
-  } 
-  
-  else {window.location.href = "pacientes.html";}
+  } else {
+    window.location.href = "pacientes.html";
+  }
 }
 
 function obtenerConsultasPaciente(cedula) {
@@ -40,40 +38,158 @@ function obtenerConsultasPaciente(cedula) {
       // Ordenar las consultas por fecha en orden descendente
       data.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
-      // Obtener el número total de consultas
-      let totalConsultas = data.length;
+      // Variables para la paginación
+      const itemsPerPage = 10;
+      let currentPage = 1;
+      let currentData = data;
 
-      // Recorrer las consultas y agregar filas a la tabla
-      data.forEach((consulta, index) => {
-        let fila = document.createElement("tr");
+      // Función para renderizar los datos de la página actual
+      function renderPage() {
+        // Limpiar el cuerpo de la tabla
+        tablaConsultas.innerHTML = "";
 
-        let numeroConsulta = document.createElement("td");
-        numeroConsulta.textContent = totalConsultas - index;
-        fila.appendChild(numeroConsulta);
+        // Obtener los datos correspondientes a la página actual
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const pageData = currentData.slice(startIndex, endIndex);
 
-        let fecha = document.createElement("td");
-        fecha.textContent = consulta.fecha;
-        fila.appendChild(fecha);
+        // Iterar sobre los datos de las consultas de la página actual
+        pageData.forEach((consulta, index) => {
+          let fila = document.createElement("tr");
 
-        let peso = document.createElement("td");
-        peso.textContent = consulta.peso;
-        fila.appendChild(peso);
+          let numeroConsulta = document.createElement("td");
+          numeroConsulta.textContent = currentData.length - startIndex - index;
+          fila.appendChild(numeroConsulta);
 
-        let notaEvolutiva = document.createElement("td");
-        notaEvolutiva.textContent = consulta.nota_evolutiva;
-        fila.appendChild(notaEvolutiva);
+          let fecha = document.createElement("td");
+          fecha.textContent = consulta.fecha;
+          fila.appendChild(fecha);
 
-        let documentos = document.createElement("td");
-        let verDocumentos = document.createElement("a");
-        verDocumentos.className = "see";
-        verDocumentos.style.cursor = "pointer";
-        verDocumentos.setAttribute("data-toggle", "modal");
-        verDocumentos.setAttribute("data-target", "#modalDocumentos");
-        verDocumentos.innerHTML = '<i class="material-icons color-m">&#xe8f4;</i>';
-        documentos.appendChild(verDocumentos);
-        fila.appendChild(documentos);
+          let peso = document.createElement("td");
+          peso.textContent = consulta.peso;
+          fila.appendChild(peso);
 
-        tablaConsultas.appendChild(fila);
+          let notaEvolutiva = document.createElement("td");
+          notaEvolutiva.textContent = consulta.nota_evolutiva;
+          fila.appendChild(notaEvolutiva);
+
+          let documentos = document.createElement("td");
+          let verDocumentos = document.createElement("a");
+          verDocumentos.className = "see";
+          verDocumentos.style.cursor = "pointer";
+          verDocumentos.setAttribute("data-toggle", "modal");
+          verDocumentos.setAttribute("data-target", "#modalDocumentos");
+          verDocumentos.innerHTML =
+            '<i class="material-icons color-m">&#xe8f4;</i>';
+          documentos.appendChild(verDocumentos);
+          fila.appendChild(documentos);
+
+          tablaConsultas.appendChild(fila);
+        });
+
+        // Actualizar la paginación
+        updatePagination();
+      }
+
+      // Función para actualizar los enlaces de paginación
+      function updatePagination() {
+        const totalPages = Math.ceil(currentData.length / itemsPerPage);
+        const paginationContainer = document.querySelector(".pagination");
+
+        paginationContainer.innerHTML = "";
+
+        const maxVisiblePages = 5;
+        const halfVisiblePages = Math.floor(maxVisiblePages / 2);
+        let startPage = currentPage - halfVisiblePages;
+        let endPage = currentPage + halfVisiblePages;
+
+        if (startPage < 1) {
+          startPage = 1;
+          endPage = Math.min(maxVisiblePages, totalPages);
+        }
+
+        if (endPage > totalPages) {
+          endPage = totalPages;
+          startPage = Math.max(1, totalPages - maxVisiblePages + 1);
+        }
+
+        // Botón anterior
+        const prevButton = document.createElement("li");
+        prevButton.className = "page-item";
+        const prevLink = document.createElement("a");
+        prevLink.className = "page-link";
+        prevLink.href = "#";
+        prevLink.textContent = "Anterior";
+        prevLink.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderPage();
+            updatePagination();
+          }
+        });
+
+        prevButton.appendChild(prevLink);
+        paginationContainer.appendChild(prevButton);
+
+        for (let i = startPage; i <= endPage; i++) {
+          const pageLink = document.createElement("li");
+          pageLink.className = "page-item";
+
+          if (i === currentPage) {
+            pageLink.classList.add("active");
+          }
+
+          const pageButton = document.createElement("a");
+          pageButton.className = "page-link";
+          pageButton.href = "#";
+          pageButton.textContent = i;
+
+          pageButton.addEventListener("click", () => {
+            currentPage = i;
+            renderPage();
+            updatePagination();
+          });
+
+          pageLink.appendChild(pageButton);
+          paginationContainer.appendChild(pageLink);
+        }
+
+        // Botón siguiente
+        const nextButton = document.createElement("li");
+        nextButton.className = "page-item";
+        const nextLink = document.createElement("a");
+        nextLink.className = "page-link";
+        nextLink.href = "#";
+        nextLink.textContent = "Siguiente";
+
+        nextLink.addEventListener("click", () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderPage();
+            updatePagination();
+          }
+        });
+
+        nextButton.appendChild(nextLink);
+        paginationContainer.appendChild(nextButton);
+      }
+
+      // Renderizar la página inicial
+      renderPage();
+
+      const filtradoInput = document.getElementById("filtrado");
+
+      filtradoInput.addEventListener("input", () => {
+        const filtro = filtradoInput.value.trim().toLowerCase();
+        currentData = data.filter((consulta) => {
+          const fecha = consulta.fecha.toLowerCase();
+          return fecha.includes(filtro);
+        });
+
+        // Actualizar la página y la paginación con los nuevos datos filtrados
+        currentPage = 1;
+        renderPage();
+        updatePagination();
       });
     })
     .catch((error) => {
@@ -81,10 +197,7 @@ function obtenerConsultasPaciente(cedula) {
     });
 }
 
-
-
 function obtenerDatosPaciente(cedula) {
-
   fetch(`http://localhost:8080/api/pacientes/${cedula}`, {
     method: "GET",
     headers: {
@@ -92,18 +205,17 @@ function obtenerDatosPaciente(cedula) {
     },
   })
     .then((response) => {
-      
       if (response.ok) {
         return response.json(); // Parsear la respuesta JSON
-      } 
-      else {
+      } else {
         throw new Error("Error al obtener los datos del paciente");
       }
     })
     .then((data) => {
-      // Llenar los campos del formulario con los datos del paciente
       document.getElementById("i_cedula").value = data.cedula;
-      document.getElementById("i_fnac").value = formatDate(data.fecha_nacimiento);
+      document.getElementById("i_fnac").value = formatDate(
+        data.fecha_nacimiento
+      );
       document.getElementById("i_nombre").value = data.paciente;
       document.getElementById("s_nacionalidad").value = data.nacionalidad;
       document.getElementById("i_lnac").value = data.lugar_nacimiento;
@@ -112,15 +224,21 @@ function obtenerDatosPaciente(cedula) {
       document.getElementById("i_email").value = data.email;
       document.getElementById("s_edocivil").value = data.estado_civil;
       document.getElementById("ta_antecedentes").value = data.antecedentes;
+
+      const agregarConsultaLink = document.querySelector("#agregarConsultaEnlace");
+      agregarConsultaLink.href = `crearConsulta.html?cedula=${cedula}`;
+
     })
-    .catch((error) => {console.error("Error:", error);});
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 function formatDate(dateString) {
   const date = new Date(dateString);
   const year = date.getFullYear();
-  let month = (date.getMonth() + 1).toString().padStart(2, '0');
-  let day = date.getDate().toString().padStart(2, '0');
+  let month = (date.getMonth() + 1).toString().padStart(2, "0");
+  let day = date.getDate().toString().padStart(2, "0");
 
   return `${year}-${month}-${day}`;
 }
@@ -128,7 +246,6 @@ function formatDate(dateString) {
 const modificarBtn = document.querySelector("#btn_modificar");
 
 modificarBtn.addEventListener("click", () => {
-
   const cedula = document.getElementById("i_cedula").value;
   const paciente = document.getElementById("i_nombre").value;
   const direccion = document.getElementById("i_direccion").value;
@@ -157,13 +274,15 @@ modificarBtn.addEventListener("click", () => {
       nacionalidad,
       antecedentes,
       sexo,
-      email
+      email,
     }),
   })
     .then((response) => {
-      if (response.ok) {alert("Los datos del paciente se actualizaron correctamente.");} 
-      
-      else {throw new Error("Error al modificar los datos del paciente.");}
+      if (response.ok) {
+        alert("Los datos del paciente se actualizaron correctamente.");
+      } else {
+        throw new Error("Error al modificar los datos del paciente.");
+      }
     })
     .catch((error) => {
       console.error("Error:", error);

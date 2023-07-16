@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -62,5 +63,10 @@ public class PacienteServiceImpl implements PacienteService{
             // No se actualiza el campo "borrado"
             pacienteRepository.save(pacienteExistente);
         }
+    }
+    @Override
+    public Map<String, Object> obtenerPacienteConsultaPorCedula(String cedula) {
+        Optional<Map<String, Object>> pacienteConsulta = pacienteRepository.obtenerPacienteConsultaPorCedula(cedula);
+        return pacienteConsulta.orElse(null);
     }
 }
