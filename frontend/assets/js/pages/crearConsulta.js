@@ -77,8 +77,13 @@ guardarBtn.addEventListener("click", async function (event) {
   const peso = parseFloat(document.getElementById("i_peso").value);
   const fecha = document.getElementById("i_fcon").value;
   const notaEvolutiva = document.getElementById("ta_notaEvolutiva").value;
-  const recipe = document.getElementById("editor-recipe");
-  const indicaciones = document.getElementById("editor-indicaciones");
+  const recipe = document.getElementById("text-recipe").innerText;
+  const indicaciones = document.getElementById("text-indicaciones").innerText;
+  
+  if (!cedula || isNaN(peso) || !fecha || !notaEvolutiva || !recipe.trim() || !indicaciones.trim()) {
+    alert("Por favor, complete todos los campos para crear la consulta.");
+    return;
+  }
 
   // Crea un objeto con los datos de la consulta en formato JSON
   const nuevaConsulta = {
@@ -104,6 +109,9 @@ guardarBtn.addEventListener("click", async function (event) {
     if (response.ok) {
       // Si la respuesta es exitosa, realiza las acciones necesarias
       alert("Consulta creada exitosamente");
+      const urlParams = new URLSearchParams(window.location.search);
+      const cedula = urlParams.get("cedula");
+      window.location.href = `/paciente.html?cedula=${cedula}`;
     } else {
       // Si la respuesta no es exitosa, maneja el error adecuadamente
       alert("Error al crear la consulta");

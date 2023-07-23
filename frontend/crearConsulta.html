@@ -109,7 +109,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label for="ta_notaEvolutiva" class="form-label">Nota Evolutiva</label>
-                            <textarea rows="1" id="ta_notaEvolutiva" class="form-control" placeholder="Nota evolutiva..."></textarea>
+                            <textarea rows="1" id="ta_notaEvolutiva" class="form-control" placeholder="Nota evolutiva..." required></textarea>
                           </div>
                         </div>
 
@@ -117,6 +117,7 @@
 
                           <label  class="form-label mb-2">Recipe</label>
                           <div id="editor-recipe" class="form-control"></div>
+                          <div id="text-recipe" style="display: none;"></div>
 
                         </div>
 
@@ -125,6 +126,7 @@
                         
                           <label class="form-label mb-2">Indicaciones</label>
                           <div id="editor-indicaciones" class="form-control"></div>
+                          <div id="text-indicaciones" style="display: none;"></div>
                           
                         </div>
 
@@ -170,12 +172,18 @@
 
       pell.init({
         element: editorR,
-        actions: ['bold', 'italic', 'olist', 'ulist']
+        actions: ['bold', 'italic', 'olist', 'ulist'],
+        onChange: function (html) {
+          document.getElementById('text-recipe').textContent = html
+        }
       })
 
       pell2.init({
         element: editorI,
-        actions: ['bold', 'italic',  'olist', 'ulist']
+        actions: ['bold', 'italic',  'olist', 'ulist'],
+        onChange: function (html) {
+          document.getElementById('text-indicaciones').textContent = html
+        }
       })
     </script>
     
