@@ -8,4 +8,6 @@ public interface ConsultaService {
     List<Object[]> findAllOrderByFechaDescWithPaciente();
 
     List<Consulta> obtenerConsultasPorCedula(String cedula);
+
+    Consulta crearConsulta(Consulta consulta);
 }

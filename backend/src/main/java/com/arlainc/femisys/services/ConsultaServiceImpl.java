@@ -26,5 +26,10 @@ public class ConsultaServiceImpl implements ConsultaService {
     public List<Consulta> obtenerConsultasPorCedula(String cedula) {
         return consultaRepository.findByCedula(cedula);
     }
+
+    @Override
+    public Consulta crearConsulta(Consulta consulta) {
+        return consultaRepository.save(consulta);
+    }
 }
 

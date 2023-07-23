@@ -64,3 +64,51 @@ if (/^\d+$/.test(cedula) && cedula.trim() !== "") {
 } else {
   window.location.href = "pacientes.html";
 }
+
+//CREAR CONSULTA
+
+// Obtén una referencia al botón de guardar
+const guardarBtn = document.querySelector("#btn_guardar");
+
+// Agrega un event listener al botón de guardar
+guardarBtn.addEventListener("click", async function (event) {
+  // Obtén los valores de los campos del formulario de la consulta
+  const cedula = urlParams.get("cedula"); // Cédula del paciente
+  const peso = parseFloat(document.getElementById("i_peso").value);
+  const fecha = document.getElementById("i_fcon").value;
+  const notaEvolutiva = document.getElementById("ta_notaEvolutiva").value;
+  const recipe = document.getElementById("editor-recipe");
+  const indicaciones = document.getElementById("editor-indicaciones");
+
+  // Crea un objeto con los datos de la consulta en formato JSON
+  const nuevaConsulta = {
+    cedula,
+    peso,
+    fecha,
+    nota_evolutiva: notaEvolutiva,
+    recipe,
+    indicaciones,
+  };
+
+  try {
+    // Realiza una solicitud POST al servidor con los datos de la consulta
+    const response = await fetch("http://localhost:8080/api/consultas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(nuevaConsulta),
+    });
+
+    if (response.ok) {
+      // Si la respuesta es exitosa, realiza las acciones necesarias
+      alert("Consulta creada exitosamente");
+    } else {
+      // Si la respuesta no es exitosa, maneja el error adecuadamente
+      alert("Error al crear la consulta");
+    }
+  } catch (error) {
+    alert("Error:", error);
+  }
+});

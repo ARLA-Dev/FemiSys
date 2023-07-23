@@ -62,7 +62,9 @@ function obtenerConsultasPaciente(cedula) {
           fila.appendChild(numeroConsulta);
 
           let fecha = document.createElement("td");
-          fecha.textContent = consulta.fecha;
+          let fechaConsulta = new Date(consulta.fecha);
+          let fechaFormateada = fechaConsulta.toISOString().split("T")[0];
+          fecha.textContent = fechaFormateada;
           fila.appendChild(fecha);
 
           let peso = document.createElement("td");
@@ -225,9 +227,10 @@ function obtenerDatosPaciente(cedula) {
       document.getElementById("s_edocivil").value = data.estado_civil;
       document.getElementById("ta_antecedentes").value = data.antecedentes;
 
-      const agregarConsultaLink = document.querySelector("#agregarConsultaEnlace");
+      const agregarConsultaLink = document.querySelector(
+        "#agregarConsultaEnlace"
+      );
       agregarConsultaLink.href = `crearConsulta.html?cedula=${cedula}`;
-
     })
     .catch((error) => {
       console.error("Error:", error);

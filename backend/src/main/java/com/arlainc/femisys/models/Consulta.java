@@ -1,10 +1,9 @@
 package com.arlainc.femisys.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "consultas")
@@ -12,6 +11,7 @@ import lombok.Data;
 public class Consulta {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -22,7 +22,7 @@ public class Consulta {
     private double peso;
 
     @Column(name = "fecha")
-    private String fecha;
+    private Date fecha;
 
     @Column(name = "nota_evolutiva")
     private String nota_evolutiva;

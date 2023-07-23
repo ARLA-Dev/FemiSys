@@ -3,11 +3,9 @@ package com.arlainc.femisys.controllers;
 import com.arlainc.femisys.models.Consulta;
 import com.arlainc.femisys.services.ConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +29,11 @@ public class ConsultaController {
     @GetMapping("/{cedula}")
     public List<Consulta> obtenerConsultasPorCedula(@PathVariable String cedula) {
         return consultaService.obtenerConsultasPorCedula(cedula);
+    }
+
+    @PostMapping
+    public ResponseEntity<Consulta> crearConsulta(@RequestBody Consulta nuevaConsulta) {
+        Consulta consultaCreada = consultaService.crearConsulta(nuevaConsulta);
+        return new ResponseEntity<>(consultaCreada, HttpStatus.CREATED);
     }
 }

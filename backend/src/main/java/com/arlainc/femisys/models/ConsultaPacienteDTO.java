@@ -2,16 +2,18 @@ package com.arlainc.femisys.models;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class ConsultaPacienteDTO {
 
     private String cedula;
     private int id;
     private double peso;
-    private String fecha;
+    private Date fecha;
     private String paciente;
 
-    public ConsultaPacienteDTO(String cedula, int id, double peso, String fecha, String paciente) {
+    public ConsultaPacienteDTO(String cedula, int id, double peso, Date fecha, String paciente) {
         this.cedula = cedula;
         this.id = id;
         this.peso = peso;
