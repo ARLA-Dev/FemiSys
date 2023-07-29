@@ -79,13 +79,14 @@ function obtenerConsultasPaciente(cedula) {
           let verDocumentos = document.createElement("a");
           verDocumentos.className = "see";
           verDocumentos.style.cursor = "pointer";
-          verDocumentos.setAttribute("data-toggle", "modal");
-          verDocumentos.setAttribute("data-target", "#modalDocumentos");
-          verDocumentos.innerHTML =
-            '<i class="material-icons color-m">&#xe8f4;</i>';
+          verDocumentos.innerHTML = '<i class="material-icons color-m">&#xe8f4;</i>';
+
+          verDocumentos.addEventListener("click", () => {
+            mostrarModalDocumentos(consulta.id); // Llamada a la función para mostrar el modal
+          });
+
           documentos.appendChild(verDocumentos);
           fila.appendChild(documentos);
-
           tablaConsultas.appendChild(fila);
         });
 
@@ -291,3 +292,48 @@ modificarBtn.addEventListener("click", () => {
       console.error("Error:", error);
     });
 });
+
+function mostrarModalDocumentos(idConsulta) {
+
+  fetch(`http://localhost:8080/api/consultas/detalle/${idConsulta}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // Parsear la respuesta JSON
+      } else {
+        throw new Error("Error al obtener los detalles de la consulta");
+      }
+    })
+    .then((data) => {
+      
+      if (data.length > 0) {
+        // Obtener el modal y los elementos del modal
+        const modal = document.getElementById("modalDocumentos");
+        const recipe = modal.querySelector(".recipe-modal");
+        const indicaciones = modal.querySelector(".indicaciones-modal");
+
+        // Mostrar los datos en el modal con formato (usar innerHTML directamente)
+        recipe.innerHTML = data[0][0] || "No hay datos disponibles";
+        indicaciones.innerHTML = data[0][1] || "No hay datos disponibles";
+
+        // Mostrar el modal
+        const bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+
+        // Agregar evento para cerrar el modal al hacer clic en el botón de cerrar
+        const closeButton = modal.querySelector(".btn-close");
+        closeButton.addEventListener("click", () => {
+          bsModal.hide();
+        });
+      } else {
+        alert("No se encontraron datos para esta consulta.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}

@@ -53,27 +53,23 @@ function renderPage() {
     seeLink.style.cursor = "pointer";
     seeLink.innerHTML = '<i class="material-icons color-m">&#xe8f4;</i>';
     accionNE.appendChild(seeLink);
-
-    // Agregar la celda de acciones a la fila
     row.appendChild(accionNE);
-
     const accionesCell = document.createElement("td");
     const seeLink2 = document.createElement("a");
     seeLink2.className = "see";
-    seeLink2.id = "see";
-    seeLink2.href = "#";
     seeLink2.style.cursor = "pointer";
     seeLink2.innerHTML = '<i class="material-icons color-m">&#xe8f4;</i>';
+
+    seeLink2.addEventListener("click", () => {
+      const idConsulta = seeLink2.closest("tr").firstElementChild.textContent;
+      mostrarModalDocumentos(idConsulta); // Llamada a la función para mostrar el modal
+    });
+
     accionesCell.appendChild(seeLink2);
-
-    // Agregar la celda de acciones a la fila
     row.appendChild(accionesCell);
-
-    // Agregar la fila al cuerpo de la tabla
     tableBody.appendChild(row);
   });
 
-  // Actualizar la paginación
   updatePagination();
 }
 
@@ -216,4 +212,49 @@ function filtrarconsultas() {
   // Renderizar la página y actualizar la paginación
   renderPage();
   updatePagination();
+}
+
+function mostrarModalDocumentos(idConsulta) {
+
+  fetch(`http://localhost:8080/api/consultas/detalle/${idConsulta}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // Parsear la respuesta JSON
+      } else {
+        throw new Error("Error al obtener los detalles de la consulta");
+      }
+    })
+    .then((data) => {
+      
+      if (data.length > 0) {
+        // Obtener el modal y los elementos del modal
+        const modal = document.getElementById("modalDocumentos");
+        const recipe = modal.querySelector(".recipe-modal");
+        const indicaciones = modal.querySelector(".indicaciones-modal");
+
+        // Mostrar los datos en el modal con formato (usar innerHTML directamente)
+        recipe.innerHTML = data[0][0] || "No hay datos disponibles";
+        indicaciones.innerHTML = data[0][1] || "No hay datos disponibles";
+
+        // Mostrar el modal
+        const bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+
+        // Agregar evento para cerrar el modal al hacer clic en el botón de cerrar
+        const closeButton = modal.querySelector(".btn-close");
+        closeButton.addEventListener("click", () => {
+          bsModal.hide();
+        });
+      } else {
+        alert("No se encontraron datos para esta consulta.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }

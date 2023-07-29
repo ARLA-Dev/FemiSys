@@ -36,4 +36,14 @@ public class ConsultaController {
         Consulta consultaCreada = consultaService.crearConsulta(nuevaConsulta);
         return new ResponseEntity<>(consultaCreada, HttpStatus.CREATED);
     }
+
+    @GetMapping("/detalle/{idConsulta}")
+    public ResponseEntity<Object[]> obtenerDetalleConsulta(@PathVariable Long idConsulta) {
+        Object[] detalleConsulta = consultaService.obtenerDetalleConsulta(idConsulta);
+        if (detalleConsulta != null) {
+            return ResponseEntity.ok(detalleConsulta);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

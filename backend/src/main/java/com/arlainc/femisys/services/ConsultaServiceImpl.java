@@ -31,5 +31,10 @@ public class ConsultaServiceImpl implements ConsultaService {
     public Consulta crearConsulta(Consulta consulta) {
         return consultaRepository.save(consulta);
     }
+
+    @Override
+    public Object[] obtenerDetalleConsulta(Long idConsulta) {
+        return consultaRepository.findDetalleConsultaById(idConsulta);
+    }
 }
 

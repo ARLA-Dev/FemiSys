@@ -10,4 +10,6 @@ public interface ConsultaService {
     List<Consulta> obtenerConsultasPorCedula(String cedula);
 
     Consulta crearConsulta(Consulta consulta);
+
+    Object[] obtenerDetalleConsulta(Long idConsulta);
 }
