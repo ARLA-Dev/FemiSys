@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0f639e61-037b-4646-b404-9d9cc4ee5773",
+		"_postman_id": "74e366d6-e260-4c5c-926e-5c614c3536bb",
 		"name": "FemiSys",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26828048"
+		"_exporter_id": "21208116"
 	},
 	"item": [
 		{
@@ -119,7 +119,7 @@
 						}
 					]
 				},
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"url": {
 					"raw": "http://localhost:8080/api/usuarios/current",
@@ -132,6 +132,299 @@
 						"api",
 						"usuarios",
 						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Paciente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4OTAxODM4N30.2r1pRxJ9l_0f6AN5BQyjcaf1JHWVzJ-SeRhisWWXTmo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paciente\": \"LAURA ORTEGA\",\r\n    \"direccion\": \"BARQUISIMETO\",\r\n    \"telefono\": \"04245345199\",\r\n    \"fecha_nacimiento\": \"1999-09-18T04:00:00.000+00:00\",\r\n    \"lugar_nacimiento\": \"BARQUISIMETO\",\r\n    \"estado_civil\": \"Casado(a)\",\r\n    \"nacionalidad\": \"Venezolano(a)\",\r\n    \"antecedentes\": \"NINGUNO PERO TODOS A LA VEZ\",\r\n    \"sexo\": \"Femenino\",\r\n    \"email\": \"LAURA@GMAIL.COM\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pacientes/26976713",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pacientes",
+						"26976713"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Paciente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4ODQxODI1Nn0.Y04gdQNVdjsYPppgTOgEpXSO3Ol1jWWSQ7sbGY_Vo1I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pacientes/borrar/26976713",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pacientes",
+						"borrar",
+						"26976713"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Paciente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4OTAxODM4N30.2r1pRxJ9l_0f6AN5BQyjcaf1JHWVzJ-SeRhisWWXTmo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pacientes/26976713",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pacientes",
+						"26976713"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Pacientes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5MDgyOTU4N30.Pd4Ubi-WSPm_qKdX06mCCve64b5aMHqB9-WuEYgxQOo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pacientes/total",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pacientes",
+						"total"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Consultas",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5MDgyOTg3OX0.G26lLrl3JiG-U1fC5NqW_ca42e3Mn5fdGNjiJ0MXIT8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultas/total",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultas",
+						"total"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Consultas Este Año",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5MDgzMDQ5Mn0.BZzkpb8HMr3jXCVWrfNRV5Y9OphZDviF6Dw58sHazeM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultas/total/anual",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultas",
+						"total",
+						"anual"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Detalle Consulta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5MDc0Mzk4OX0.1faOjGadvTtOl-S57e446TFtU5lsJMuBLSd5xKFqIxI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultas/detalle/2000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultas",
+						"detalle",
+						"2000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Nota Consulta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5MDgyMDY2NX0.Jvog0_UPiTjzSkJmUDu0VqFMeM_5HvJh9nQhW16OzQo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultas/nota/41813",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultas",
+						"nota",
+						"41813"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Paciente en Consulta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4OTYyMzg4MH0.bjSYPRaWQ5ht0r2uv79lqrO4jnMxL-nbd2tbPAqhkLs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pacientes/11792730/consulta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pacientes",
+						"11792730",
+						"consulta"
 					]
 				}
 			},
@@ -162,6 +455,37 @@
 					"path": [
 						"api",
 						"consultas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Consultas del Paciente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4OTAyMTgyOH0.yiuuWncBYNzYg7MPy2v9ZzUuuQwSf8ELIAos_tow2JQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultas/988906",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultas",
+						"988906"
 					]
 				}
 			},
