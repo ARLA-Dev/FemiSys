@@ -36,5 +36,10 @@ public class ConsultaServiceImpl implements ConsultaService {
     public Object[] obtenerDetalleConsulta(Long idConsulta) {
         return consultaRepository.findDetalleConsultaById(idConsulta);
     }
+
+    @Override
+    public Object[] obtenerNotaConsulta(Long idConsulta) {
+        return consultaRepository.findNotaConsultaById(idConsulta);
+    }
 }
 

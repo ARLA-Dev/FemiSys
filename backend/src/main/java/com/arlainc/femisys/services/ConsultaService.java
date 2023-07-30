@@ -12,4 +12,6 @@ public interface ConsultaService {
     Consulta crearConsulta(Consulta consulta);
 
     Object[] obtenerDetalleConsulta(Long idConsulta);
+
+    Object[] obtenerNotaConsulta(Long idConsulta);
 }

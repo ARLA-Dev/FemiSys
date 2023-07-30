@@ -21,6 +21,9 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 
     @Query("SELECT c.recipe, c.indicaciones FROM Consulta c WHERE c.id = :idConsulta")
     Object[] findDetalleConsultaById(Long idConsulta);
+
+    @Query("SELECT c.nota_evolutiva FROM Consulta c WHERE c.id = :idConsulta")
+    Object[] findNotaConsultaById(Long idConsulta);
 }
 
 

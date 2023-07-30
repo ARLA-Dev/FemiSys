@@ -46,4 +46,14 @@ public class ConsultaController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/nota/{idConsulta}")
+    public ResponseEntity<Object[]> obtenerNotaConsulta(@PathVariable Long idConsulta) {
+        Object[] notaConsulta = consultaService.obtenerNotaConsulta(idConsulta);
+        if (notaConsulta != null) {
+            return ResponseEntity.ok(notaConsulta);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

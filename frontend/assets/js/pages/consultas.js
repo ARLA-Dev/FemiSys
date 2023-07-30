@@ -44,16 +44,22 @@ function renderPage() {
     fechaCell.textContent = fechaFormateada;
     row.appendChild(fechaCell);
 
-    // Crear las celdas para las acciones
+    //Ver Nota Evolutiva
     const accionNE = document.createElement("td");
     const seeLink = document.createElement("a");
     seeLink.className = "see";
-    seeLink.id = "see_ne";
-    seeLink.href = "#";
     seeLink.style.cursor = "pointer";
     seeLink.innerHTML = '<i class="material-icons color-m">&#xe8f4;</i>';
+
+    seeLink.addEventListener("click", () => {
+      const idConsulta = seeLink.closest("tr").firstElementChild.textContent;
+      mostrarModalNotaEvolutiva(idConsulta); // Llamada a la función para mostrar el modal
+    });
+
     accionNE.appendChild(seeLink);
     row.appendChild(accionNE);
+
+    //Ver Indicaciones y Recipe
     const accionesCell = document.createElement("td");
     const seeLink2 = document.createElement("a");
     seeLink2.className = "see";
@@ -214,6 +220,52 @@ function filtrarconsultas() {
   updatePagination();
 }
 
+
+//Métdo para mostrar el modal de la nota evolutiva
+function mostrarModalNotaEvolutiva(idConsulta) {
+
+  fetch(`http://localhost:8080/api/consultas/nota/${idConsulta}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // Parsear la respuesta JSON
+      } else {
+        throw new Error("Error al obtener la nota evolutiva de la consulta");
+      }
+    })
+    .then((data) => {
+      
+      if (data.length > 0) {
+        // Obtener el modal y los elementos del modal
+        const modal = document.getElementById("modalNota");
+        const nota = modal.querySelector(".nota-modal");
+
+        // Mostrar los datos en el modal con formato (usar innerHTML directamente)
+        nota.textContent = data[0] || "No hay datos disponibles";
+
+        // Mostrar el modal
+        const bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+
+        // Agregar evento para cerrar el modal al hacer clic en el botón de cerrar
+        const closeButton = modal.querySelector(".btn-close");
+        closeButton.addEventListener("click", () => {
+          bsModal.hide();
+        });
+      } else {
+        alert("No se encontraron datos para esta consulta.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+//Métdo para mostrar el modal de recipe e indicaciones
 function mostrarModalDocumentos(idConsulta) {
 
   fetch(`http://localhost:8080/api/consultas/detalle/${idConsulta}`, {
