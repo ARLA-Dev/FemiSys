@@ -4,7 +4,6 @@ import com.arlainc.femisys.models.Consulta;
 import com.arlainc.femisys.repositories.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -40,6 +39,14 @@ public class ConsultaServiceImpl implements ConsultaService {
     @Override
     public Object[] obtenerNotaConsulta(Long idConsulta) {
         return consultaRepository.findNotaConsultaById(idConsulta);
+    }
+    @Override
+    public long contarTotalConsultas() {
+        return consultaRepository.count();
+    }
+    @Override
+    public long contarConsultasThisYear() {
+        return consultaRepository.countConsultasThisYear();
     }
 }
 

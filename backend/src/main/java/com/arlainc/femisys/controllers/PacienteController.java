@@ -66,5 +66,11 @@ public class PacienteController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("api/pacientes/total")
+    public ResponseEntity<Long> obtenerTotalPacientesNoBorrados() {
+        long totalPacientesNoBorrados = pacienteService.contarPacientesNoBorrados();
+        return ResponseEntity.ok(totalPacientesNoBorrados);
+    }
 }
 

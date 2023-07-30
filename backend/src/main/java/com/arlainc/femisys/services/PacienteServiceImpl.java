@@ -69,4 +69,9 @@ public class PacienteServiceImpl implements PacienteService{
         Optional<Map<String, Object>> pacienteConsulta = pacienteRepository.obtenerPacienteConsultaPorCedula(cedula);
         return pacienteConsulta.orElse(null);
     }
+
+    @Override
+    public long contarPacientesNoBorrados() {
+        return pacienteRepository.countPacientesNoBorrados();
+    }
 }

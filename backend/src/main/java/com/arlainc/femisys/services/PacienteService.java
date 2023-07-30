@@ -11,4 +11,5 @@ public interface PacienteService {
     Paciente buscarPorCedula(String cedula);
     void modificarPaciente(String cedula, Paciente paciente);
     Map<String, Object> obtenerPacienteConsultaPorCedula(String cedula);
+    long contarPacientesNoBorrados();
 }

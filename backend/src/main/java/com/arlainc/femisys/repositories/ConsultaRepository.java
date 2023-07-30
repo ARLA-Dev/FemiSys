@@ -24,6 +24,9 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 
     @Query("SELECT c.nota_evolutiva FROM Consulta c WHERE c.id = :idConsulta")
     Object[] findNotaConsultaById(Long idConsulta);
+
+    @Query("SELECT COUNT(c) FROM Consulta c WHERE YEAR(c.fecha) = YEAR(CURRENT_DATE)")
+    long countConsultasThisYear();
 }
 
 

@@ -23,5 +23,8 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
             "GROUP BY p.cedula, p.paciente")
     Optional<Map<String, Object>> obtenerPacienteConsultaPorCedula(@Param("cedula") String cedula);
 
+    @Query("SELECT COUNT(p) FROM Paciente p WHERE p.borrado = 0")
+    long countPacientesNoBorrados();
+
 
 }

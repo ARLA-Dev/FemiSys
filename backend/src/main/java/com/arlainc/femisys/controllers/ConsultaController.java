@@ -56,4 +56,16 @@ public class ConsultaController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> obtenerTotalConsultas() {
+        long totalConsultas = consultaService.contarTotalConsultas();
+        return ResponseEntity.ok(totalConsultas);
+    }
+
+    @GetMapping("/total/anual")
+    public ResponseEntity<Long> obtenerTotalConsultasThisYear() {
+        long totalConsultasThisYear = consultaService.contarConsultasThisYear();
+        return ResponseEntity.ok(totalConsultasThisYear);
+    }
 }

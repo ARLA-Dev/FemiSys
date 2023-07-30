@@ -20,13 +20,6 @@ barra_header.innerHTML =
   <div class="collapse navbar-collapse">
 
     <ul class="navbar-nav ml-auto">
-  
-      <li>
-        <a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()">
-          <i class="feather icon-maximize"></i>
-        </a>
-      </li>
-
       <li>
         <div class="dropdown drp-user">
           <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown"></a>

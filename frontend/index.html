@@ -62,24 +62,22 @@
                           <i class="fa fa-clock text-c-green f-36"></i>
                         </div>
                         <div class="col text-right">
-                          <h3>Hora</h3>
-                          <h5 class="text-c-blue mb-0">
-                            Domingo <span class="text-muted">02</span>
+                          <h3 id="hora" class="hora">00:00:00 AM</h3>
+                          <h5 class="text-c-blue mb-0 dia">
+                            Domingo <span class="text-muted dia-numero">02</span>
                           </h5>
                         </div>
                       </div>
                     </div>
                     <div class="card-block">
-                      <div
-                        class="row align-items-center justify-content-center card-active"
-                      >
+                      <div class="row align-items-center justify-content-center card-active">
                         <div class="col-6">
-                          <h6 class="text-center m-b-10 tamano">
+                          <h6 class="text-center m-b-10 tamano mes">
                             <span class="text-muted m-r-5 tamano">Mes:</span>Abril
                           </h6>
                         </div>
                         <div class="col-6">
-                          <h6 class="text-center m-b-10 tamano">
+                          <h6 class="text-center m-b-10 tamano anio">
                             <span class="text-muted m-r-5 tamano">Año:</span>2023
                           </h6>
                         </div>
@@ -87,6 +85,7 @@
                     </div>
                   </div>
                 </div>
+                
                 <!--FIN HORA Y FECHA-->
 
                 <!------PRIMERAS GRÁFICAS-->
@@ -96,9 +95,9 @@
                       <h5 class="mb-4">Pacientes Registrados</h5>
                       <div class="row d-flex align-items-center">
                         <div class="col-9">
-                          <h3 class="f-w-300 d-flex align-items-center m-b-0">
+                          <h3 class="f-w-300 d-flex align-items-center m-b-0 pacientes-registrados">
                             <i class="fa fa-users text-c-green f-30 m-r-5"></i>
-                            6.000
+                            <span id="pacientesRegistradosValue"></span>
                           </h3>
                         </div>
                       </div>
@@ -112,11 +111,11 @@
                       <h5 class="mb-4">Consultas Totales</h5>
                       <div class="row d-flex align-items-center">
                         <div class="col-9">
-                          <h3 class="f-w-300 d-flex align-items-center m-b-0">
+                          <h3 class="f-w-300 d-flex align-items-center m-b-0 consultas-totales">
                             <i
                               class="fa fa-notes-medical text-c-green f-30 m-r-5"
                             ></i>
-                            46.000
+                            <span id="consultasTotalesValue"></span>
                           </h3>
                         </div>
                       </div>
@@ -130,11 +129,11 @@
                       <h5 class="mb-4">Consultas de Este Año</h5>
                       <div class="row d-flex align-items-center">
                         <div class="col-9">
-                          <h3 class="f-w-300 d-flex align-items-center m-b-0">
+                          <h3 class="f-w-300 d-flex align-items-center m-b-0 consultas-anuales">
                             <i
                               class="fa fa-calendar text-c-green f-30 m-r-5"
                             ></i>
-                            100
+                            <span id="consultasAnualesValue"></span>
                           </h3>
                         </div>
                       </div>
@@ -178,6 +177,7 @@
     <script src="assets/js/barra_navegacion.js"></script>
     <script src="assets/js/barra_header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
     <script>
       setTimeout(function(){
         $('.loader_bg').fadeToggle();
