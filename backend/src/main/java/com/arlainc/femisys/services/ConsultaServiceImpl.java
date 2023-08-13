@@ -48,5 +48,11 @@ public class ConsultaServiceImpl implements ConsultaService {
     public long contarConsultasThisYear() {
         return consultaRepository.countConsultasThisYear();
     }
+
+    @Override
+    public List<Object[]> contarConsultasPorMesUltimoAnio() {
+        return consultaRepository.contarConsultasPorMesUltimoAnio();
+    }
+
 }
 

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "74e366d6-e260-4c5c-926e-5c614c3536bb",
+		"_postman_id": "9d448f63-49ed-44fa-be2f-6486f1c82f90",
 		"name": "FemiSys",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21208116"
+		"_exporter_id": "26828048"
 	},
 	"item": [
 		{
@@ -697,6 +697,39 @@
 					"path": [
 						"api",
 						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultas del último año",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5MjA1MzE4OH0.tExW5FJH_8RaoeMn3xIf7UCfK6ilcTZjt9Vi3I3vKpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultas/total/anual/mensual",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultas",
+						"total",
+						"anual",
+						"mensual"
 					]
 				}
 			},

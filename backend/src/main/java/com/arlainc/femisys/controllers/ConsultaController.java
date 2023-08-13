@@ -68,4 +68,11 @@ public class ConsultaController {
         long totalConsultasThisYear = consultaService.contarConsultasThisYear();
         return ResponseEntity.ok(totalConsultasThisYear);
     }
+
+    @GetMapping("/total/anual/mensual")
+    public ResponseEntity<List<Object[]>> obtenerConsultasPorMesUltimoAnio() {
+        List<Object[]> consultasPorMes = consultaService.contarConsultasPorMesUltimoAnio();
+        return ResponseEntity.ok(consultasPorMes);
+    }
+
 }

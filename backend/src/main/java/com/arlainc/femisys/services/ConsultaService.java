@@ -16,4 +16,6 @@ public interface ConsultaService {
     Object[] obtenerNotaConsulta(Long idConsulta);
     long contarTotalConsultas();
     long contarConsultasThisYear();
+
+    List<Object[]> contarConsultasPorMesUltimoAnio();
 }

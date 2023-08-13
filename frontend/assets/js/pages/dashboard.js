@@ -115,6 +115,39 @@ function getToken() {
         consultasAnualesValue.textContent = data;
       })
       .catch((error) => console.error("Error:", error));
+
+// Endpoint para obtener los datos de consultas mensuales
+fetch("http://localhost:8080/api/consultas/total/anual/mensual", {
+  headers: {
+    Authorization: getToken(),
+  },
+})
+  .then((response) => response.json()) // Parsea la respuesta como JSON
+  .then((data) => {
+    const formattedData = data.map(([fecha, cantidad]) => ({
+      y: fecha,
+      a: cantidad,
+    }));
+
+    // Código para configurar y renderizar el gráfico Morris
+    Morris.Bar({
+      element: 'morris-bar-stacked-chart',
+      data: formattedData,
+      xkey: 'y',
+      ykeys: ['a'],
+      labels: ['Consultas'],
+      stacked: true,
+      barSizeRatio: 0.50,
+      barGap: 3,
+      resize: true,
+      responsive: true,
+      barColors: ["0-#1de9b6-#1dc4e9"],
+    });
+  })
+  .catch((error) => console.error("Error:", error));
+
+
+
   }
 
   // Llama a la función para obtener los datos al cargar la página
