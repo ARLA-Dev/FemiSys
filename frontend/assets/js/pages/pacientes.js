@@ -221,30 +221,44 @@ function filtrarPacientes() {
 }
 
 function eliminarPaciente(cedula) {
-
-  const confirmar = confirm('¿Estás seguro de que deseas eliminar este paciente?');
-
-  if(confirmar){
-
-    // Realizar la llamada fetch al endpoint correspondiente para eliminar el paciente
-    fetch(`http://localhost:8080/api/pacientes/borrar/${cedula}`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-      }
-    })
-    .then(response => {
+  // Mostrar un cuadro de diálogo de SweetAlert 2 para confirmar la eliminación
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: 'Esta acción no se puede deshacer',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Realizar la llamada fetch al endpoint correspondiente para eliminar el paciente
+      fetch(`http://localhost:8080/api/pacientes/borrar/${cedula}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+        }
+      })
+      .then(response => {
         if (response.ok) {
-          // Eliminación exitosa, puedes realizar alguna acción adicional si lo deseas
-          alert('Paciente eliminado correctamente');
-          window.location.reload();
-          
+          // Eliminación exitosa, mostrar SweetAlert de éxito y recargar la página
+          Swal.fire(
+            '¡Eliminado!',
+            'El paciente ha sido eliminado.',
+            'success'
+          ).then(() => {
+            window.location.reload();
+          });
         } else {
-          throw new Error('Error al eliminar el paciente');
+          Swal.fire(
+            '¡Error!',
+            'No se pudo eliminar el paciente.',
+            'error'
+          )
         }
       })
       .catch(error => {
         console.error('Error:', error);
       });
-  }
+    }
+  });
 }

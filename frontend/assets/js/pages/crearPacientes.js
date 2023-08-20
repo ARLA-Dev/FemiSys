@@ -17,21 +17,27 @@ guardarBtn.addEventListener('click', async function(event) {
   const antecedentes = document.getElementById('ta_antecedentes').value.toUpperCase();
   const sexo = 'Femenino';
 
-  // Crea un objeto con los datos del paciente
-  const paciente = {
-    paciente: `${nombre} ${apellido}`,
-    cedula,
-    direccion,
-    telefono,
-    fecha_nacimiento: fechaNacimiento,
-    lugar_nacimiento: lugarNacimiento,
-    estado_civil: estadoCivil,
-    nacionalidad,
-    antecedentes,
-    sexo, // Puedes agregar un campo de selección de género en tu formulario y obtener su valor aquí
-    email,
-    borrado: 0
-  };
+  // Verificar si algún campo está vacío
+  if (
+    cedula.trim() === '' ||
+    fechaNacimiento.trim() === '' ||
+    nombre.trim() === '' ||
+    apellido.trim() === '' ||
+    nacionalidad.trim() === '' ||
+    lugarNacimiento.trim() === '' ||
+    direccion.trim() === '' ||
+    telefono.trim() === '' ||
+    email.trim() === '' ||
+    estadoCivil.trim() === '' ||
+    antecedentes.trim() === ''
+  ) {
+    Swal.fire(
+      '¡Campos vacíos!',
+      'Por favor completa todos los campos.',
+      'warning'
+    );
+    return; // Detener la ejecución si hay campos vacíos
+  }
 
   try {
     // Realiza una solicitud POST al servidor con los datos del paciente
@@ -41,7 +47,20 @@ guardarBtn.addEventListener('click', async function(event) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
       },
-      body: JSON.stringify(paciente)
+      body: JSON.stringify({
+        paciente: `${nombre} ${apellido}`,
+        cedula,
+        direccion,
+        telefono,
+        fecha_nacimiento: fechaNacimiento,
+        lugar_nacimiento: lugarNacimiento,
+        estado_civil: estadoCivil,
+        nacionalidad,
+        antecedentes,
+        sexo,
+        email,
+        borrado: 0
+      })
     });
 
     if (response.ok) {
@@ -58,12 +77,26 @@ guardarBtn.addEventListener('click', async function(event) {
       document.getElementById('i_email').value = '';
       document.getElementById('s_edocivil').value = '';
       document.getElementById('ta_antecedentes').value = '';
+
+      // Mostrar SweetAlert 2 de éxito
+      Swal.fire(
+        '¡Guardado!',
+        'Los datos del paciente se han guardado correctamente.',
+        'success'
+      ).then(() => {
+        window.location.href = 'pacientes.html';
+      })
     } else {
-      // Si la respuesta no es exitosa, maneja el error adecuadamente
-      alert('Error al crear el paciente');
+      // Si la respuesta no es exitosa, mostrar SweetAlert 2 de error
+      Swal.fire(
+        '¡Error!',
+        'Error al crear el paciente.',
+        'error'
+      );
     }
   } catch (error) {
-    alert('Error:', error);
+    console.error('Error:', error);
   }
 });
+
 

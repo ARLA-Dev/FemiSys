@@ -4,6 +4,15 @@ login_btn.addEventListener("click", async function (event) {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
+  if (username.trim() === "" || password.trim() === "") {
+    Swal.fire(
+      '¡Campos vacíos!',
+      'Por favor ingresa usuario y contraseña',
+      'warning'
+    );
+    return; // Detener la ejecución si hay campos vacíos
+  }
+
   try {
     const response = await fetch("http://localhost:8080/login", {
       method: "POST",
@@ -27,7 +36,11 @@ login_btn.addEventListener("click", async function (event) {
         console.error("No se encontró el token en la respuesta");
       }
     } else {
-      throw new Error("Inicio de sesión fallido");
+      Swal.fire(
+        '¡Error!',
+        'Usuario o contraseña incorrectos',
+        'error'
+      )
     }
   } catch (error) {
     console.error("Error:", error);

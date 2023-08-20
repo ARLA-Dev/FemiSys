@@ -4,6 +4,15 @@ const segundoFormulario = document.querySelector('form.d-none');
 lupa.addEventListener('click', function (event) {
   const username = document.getElementById('username').value;
 
+  if (username.trim() === "" ) {
+    Swal.fire(
+      '¡Campo vacío!',
+      'Por favor ingresa usuario',
+      'warning'
+    );
+    return; // Detener la ejecución si hay campos vacíos
+  }
+
   fetch('http://localhost:8080/api/usuarios/recuperar_clave/' + username, {
     method: 'GET',
     headers: {
@@ -17,7 +26,11 @@ lupa.addEventListener('click', function (event) {
 
         if(!segundoFormulario.classList.contains("d-none")){segundoFormulario.classList.add('d-none');}
 
-        throw new Error('Error en la solicitud');
+        Swal.fire(
+          '¡Error!',
+          'Usuario no encontrado',
+          'error'
+        )
       }
     })
     .then((data) => {
@@ -41,6 +54,15 @@ recuperar_btn.addEventListener('click', function (event) {
   const respuesta = document.getElementById('respuesta').value;
   const nuevaClave = document.getElementById('password').value;
 
+  if (username.trim() === "" || respuesta.trim() === "" || nuevaClave.trim() === "") {
+    Swal.fire(
+      '¡Campos vacíos!',
+      'Por favor ingrese todos los campos',
+      'warning'
+    );
+    return; // Detener la ejecución si hay campos vacíos
+  }
+
   fetch('http://localhost:8080/api/usuarios/recuperar_clave/' + username, {
     method: 'PUT',
     headers: {
@@ -53,11 +75,24 @@ recuperar_btn.addEventListener('click', function (event) {
     mode: 'cors', // Agrega este encabezado
   })
     .then((response) => {
+
       if (response.ok) {
-        alert('La contraseña ha sido cambiada correctamente');
-      } else {
-        throw new Error('Error en la solicitud');
-     }
+        Swal.fire(
+          '¡Exito!',
+          'Se ha cambiado la contraseña',
+          'success'
+        ).then(() => {
+          window.location.href = "login.html";
+        })
+      } 
+
+      else {
+        Swal.fire(
+          '¡Error!',
+          'Respuesta de seguridad incorrecta',
+          'error'
+        )
+      }
     })
     .catch((error) => {
       console.error(error);
