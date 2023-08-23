@@ -262,6 +262,26 @@ modificarBtn.addEventListener("click", () => {
   const sexo = "Femenino";
   const email = document.getElementById("i_email").value;
 
+  if (
+    cedula.trim() === "" ||
+    paciente.trim() === "" ||
+    direccion.trim() === "" ||
+    telefono.trim() === "" ||
+    fechaNacimiento.trim() === "" ||
+    lugarNacimiento.trim() === "" ||
+    estadoCivil.trim() === "" ||
+    nacionalidad.trim() === "" ||
+    antecedentes.trim() === "" ||
+    email.trim() === ""
+  ) {
+    Swal.fire(
+      "¡Campos vacíos!",
+      "Por favor completa todos los campos.",
+      "warning"
+    );
+    return;
+  }
+
   fetch(`http://localhost:8080/api/pacientes/${cedula}`, {
     method: "PUT",
     headers: {
@@ -283,15 +303,29 @@ modificarBtn.addEventListener("click", () => {
   })
     .then((response) => {
       if (response.ok) {
-        alert("Los datos del paciente se actualizaron correctamente.");
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Los datos del paciente se actualizaron correctamente.',
+        });
       } else {
-        throw new Error("Error al modificar los datos del paciente.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Ocurrió un error al modificar los datos del paciente.',
+        })
       }
     })
     .catch((error) => {
       console.error("Error:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Ocurrió un error al modificar los datos del paciente.',
+      });
     });
 });
+
 
 function mostrarModalDocumentos(idConsulta) {
 

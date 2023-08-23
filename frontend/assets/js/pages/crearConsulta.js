@@ -79,10 +79,15 @@ guardarBtn.addEventListener("click", async function (event) {
   const notaEvolutiva = document.getElementById("ta_notaEvolutiva").value;
   const recipe = document.getElementById("text-recipe").innerText;
   const indicaciones = document.getElementById("text-indicaciones").innerText;
-  
+
+  // Verificar si algún campo está vacío
   if (!cedula || isNaN(peso) || !fecha || !notaEvolutiva || !recipe.trim() || !indicaciones.trim()) {
-    alert("Por favor, complete todos los campos para crear la consulta.");
-    return;
+    Swal.fire(
+      "¡Campos vacíos!",
+      "Por favor completa todos los campos para crear la consulta.",
+      "warning"
+    );
+    return; // Detener la ejecución si hay campos vacíos
   }
 
   // Crea un objeto con los datos de la consulta en formato JSON
@@ -108,15 +113,29 @@ guardarBtn.addEventListener("click", async function (event) {
 
     if (response.ok) {
       // Si la respuesta es exitosa, realiza las acciones necesarias
-      alert("Consulta creada exitosamente");
-      const urlParams = new URLSearchParams(window.location.search);
-      const cedula = urlParams.get("cedula");
-      window.location.href = `/paciente.html?cedula=${cedula}`;
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Consulta creada exitosamente.",
+      }).then(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cedula = urlParams.get("cedula");
+        window.location.href = `/paciente.html?cedula=${cedula}`;
+      });
     } else {
-      // Si la respuesta no es exitosa, maneja el error adecuadamente
-      alert("Error al crear la consulta");
+      // Si la respuesta no es exitosa, mostrar SweetAlert 2 de error
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Error al crear la consulta.",
+      });
     }
   } catch (error) {
-    alert("Error:", error);
+    console.error("Error:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Ocurrió un error al crear la consulta.",
+    });
   }
 });

@@ -49,7 +49,6 @@ fetch('http://localhost:8080/api/usuarios/current', {
   const btnGuardar = document.getElementById("btnGuardar")
 
   btnGuardar.addEventListener("click", function() {
-
     const pregunta = selectElement.value;
     const respuesta = document.getElementById("respuesta").value;
     const password_old = document.getElementById("o_pass").value;
@@ -58,33 +57,52 @@ fetch('http://localhost:8080/api/usuarios/current', {
   
     // Verificar si se debe utilizar la contraseña antigua o la nueva contraseña
     const password = useOldPassword ? password_new : password_old;
-
-    
+  
+    // Verificar si algún campo está vacío
+    if (respuesta.trim() === "" || password.trim() === "" || password_old.trim() === "") {
+      Swal.fire(
+        '¡Campos vacíos!',
+        'Por favor completa todos los campos.',
+        'warning'
+      );
+      return; // Detener la ejecución si hay campos vacíos
+    }
+  
     fetch('http://localhost:8080/api/usuarios/current', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    body: JSON.stringify({
-      password_old,
-      pregunta,
-      respuesta,
-      password
-    }),
-    mode: 'cors', // Agrega este encabezado
-  })
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({
+        password_old,
+        pregunta,
+        respuesta,
+        password
+      }),
+      mode: 'cors', // Agrega este encabezado
+    })
     .then((response) => {
       if (response.ok) {
-        alert('Usuario modificado correctamente');
+        Swal.fire(
+          '¡Éxito!',
+          'Usuario modificado correctamente.',
+          'success'
+        );
       } else {
         throw new Error('Error en la solicitud');
-     }
+      }
     })
     .catch((error) => {
       console.error(error);
+      Swal.fire(
+        '¡Error!',
+        'Error al modificar el usuario.',
+        'error'
+      );
     });
   });
+  
   
 
   
