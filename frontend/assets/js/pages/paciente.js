@@ -379,7 +379,6 @@ modificarBtn.addEventListener("click", () => {
     });
 });
 
-
 function mostrarModalDocumentos(idConsulta) {
 
   fetch(`http://localhost:8080/api/consultas/detalle/${idConsulta}`, {
@@ -424,3 +423,32 @@ function mostrarModalDocumentos(idConsulta) {
       console.error("Error:", error);
     });
 }
+
+function imprimirPDF() {
+  // Crear una instancia de jsPDF
+  window.jsPDF = window.jspdf.jsPDF;
+  const pdf = new jsPDF({
+    unit: 'in',  // Unidades en pulgadas
+    format: [8.5, 5.5],  // Tamaño de la hoja: 8.5 x 5.5 pulgadas
+    orientation: 'landscape', // Cambiar a orientación vertical
+  });
+
+  // Definir la posición inicial para la primera columna
+  let x1 = 0.5; // 0.5 pulgadas desde el margen izquierdo
+  let x2 = 4.25; // 4.25 pulgadas desde el margen izquierdo (la mitad del ancho de la página)
+
+  // Agregar contenido a la primera columna
+  pdf.text('Columna 1:', x1, 0.5);
+  pdf.text('Contenido de la columna 1.', x1, 0.7);
+
+  // Agregar contenido a la segunda columna
+  pdf.text('Columna 2:', x2, 0.5);
+  pdf.text('Contenido de la columna 2.', x2, 0.7);
+
+  // Para mostrar el PDF en una nueva ventana del navegador:
+  pdf.output('dataurlnewwindow');
+}
+
+// Llamar a la función para imprimir el PDF
+imprimirPDF();
+
