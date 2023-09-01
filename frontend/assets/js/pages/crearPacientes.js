@@ -1,5 +1,8 @@
 // Obtén una referencia al botón de guardar
 const guardarBtn = document.querySelector('#btn_guardar');
+const fechaHoy = new Date().toISOString().split('T')[0];
+document.getElementById('i_fnac').max = fechaHoy;
+
 
 // Agrega un event listener al botón de guardar
 guardarBtn.addEventListener('click', async function(event) {
@@ -12,7 +15,7 @@ guardarBtn.addEventListener('click', async function(event) {
   const lugarNacimiento = document.getElementById('i_lnac').value.toUpperCase();
   const direccion = document.getElementById('i_direccion').value.toUpperCase();
   const telefono = document.getElementById('i_telefono').value;
-  const email = document.getElementById('i_email').value.toUpperCase();
+  let email = document.getElementById('i_email').value.toUpperCase();
   const estadoCivil = document.getElementById('s_edocivil').value;
   const antecedentes = document.getElementById('ta_antecedentes').value.toUpperCase();
   const sexo = 'Femenino';
@@ -27,7 +30,6 @@ guardarBtn.addEventListener('click', async function(event) {
     lugarNacimiento.trim() === '' ||
     direccion.trim() === '' ||
     telefono.trim() === '' ||
-    email.trim() === '' ||
     estadoCivil.trim() === '' ||
     antecedentes.trim() === ''
   ) {
@@ -39,7 +41,59 @@ guardarBtn.addEventListener('click', async function(event) {
     return; // Detener la ejecución si hay campos vacíos
   }
 
+  if (!/^\d{1,15}$/.test(cedula)) {
+    Swal.fire(
+      '¡Cédula inválida!',
+      'La cédula debe contener solo números y tener 15 caracteres o menos.',
+      'warning'
+    );
+    return;
+  }
+
+  if (fechaNacimiento > fechaHoy) {
+    Swal.fire(
+      '¡Fecha de nacimiento inválida!',
+      'Estás intentando ingresar una fecha futura.',
+      'warning'
+    );
+    return;
+  }
+
+  const nombreCompleto = nombre + apellido;
+
+  if (nombreCompleto.length > 255 || lugarNacimiento.length > 255 || direccion.length > 255) {
+    Swal.fire(
+      '¡Texto demasiado largo!',
+      'Los campos de nombre, apellido, lugar de nacimiento y dirección no pueden exceder los 255 caracteres.',
+      'warning'
+    );
+    return;
+  }
+
+  if (email.trim() !== '') {
+    if (email.indexOf('@') === -1 || email.indexOf('@') !== email.lastIndexOf('@') || email.length > 255) {
+      Swal.fire(
+        '¡Correo electrónico inválido!',
+        'El correo electrónico debe contener un "@" y tener un máximo de 255 caracteres.',
+        'warning'
+      );
+      return;
+    }
+  }
+
+  if (telefono.length > 15 || !/^(\+)?\d+$/.test(telefono)) {
+    Swal.fire(
+      '¡Teléfono inválido!',
+      'El teléfono debe contener solo números y un símbolo "+" (opcional), con un máximo de 15 caracteres.',
+      'warning'
+    );
+    return;
+  }
+
   try {
+
+    email = email.trim() === '' ? "NT" : email;
+
     // Realiza una solicitud POST al servidor con los datos del paciente
     const response = await fetch('http://localhost:8080/api/pacientes', {
       method: 'POST',

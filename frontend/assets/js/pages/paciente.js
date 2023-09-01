@@ -14,6 +14,9 @@ if (!currentUrl.match(/\/paciente.html\?cedula=\d+/)) {
   }
 }
 
+const fechaHoy = new Date().toISOString().split('T')[0];
+document.getElementById('i_fnac').max = fechaHoy;
+
 function obtenerConsultasPaciente(cedula) {
   fetch(`http://localhost:8080/api/consultas/${cedula}`, {
     method: "GET",
@@ -271,8 +274,7 @@ modificarBtn.addEventListener("click", () => {
     lugarNacimiento.trim() === "" ||
     estadoCivil.trim() === "" ||
     nacionalidad.trim() === "" ||
-    antecedentes.trim() === "" ||
-    email.trim() === ""
+    antecedentes.trim() === ""
   ) {
     Swal.fire(
       "¡Campos vacíos!",
@@ -281,6 +283,57 @@ modificarBtn.addEventListener("click", () => {
     );
     return;
   }
+
+  if (email !== 'NT') {
+    if (!/^.+@.+\..+$/.test(email) || email.length > 255) {
+      Swal.fire(
+        '¡Correo electrónico inválido!',
+        'El correo electrónico debe contener un "@" y tener un máximo de 255 caracteres.',
+        'warning'
+      );
+      return;
+    }
+  }
+
+  if (telefono.length > 15 || !/^(\+)?\d+$/.test(telefono)) {
+    Swal.fire(
+      '¡Teléfono inválido!',
+      'El teléfono debe contener solo números y un símbolo "+" opcional, con un máximo de 15 caracteres.',
+      'warning'
+    );
+    return;
+  }
+
+  const nombreCompleto = nombre + apellido;
+
+  if (nombreCompleto.length > 255 || lugarNacimiento.length > 255 || direccion.length > 255) {
+    Swal.fire(
+      '¡Texto demasiado largo!',
+      'Los campos de nombre, apellido, lugar de nacimiento y dirección no pueden exceder los 255 caracteres.',
+      'warning'
+    );
+    return;
+  }
+
+  if (fechaNacimiento > fechaHoy) {
+    Swal.fire(
+      '¡Fecha de nacimiento inválida!',
+      'Estás intentando ingresar una fecha futura.',
+      'warning'
+    );
+    return;
+  }
+
+
+  if (!/^\d{1,15}$/.test(cedula)) {
+    Swal.fire(
+      '¡Cédula inválida!',
+      'La cédula debe contener solo números y tener 15 caracteres o menos.',
+      'warning'
+    );
+    return;
+  }
+
 
   fetch(`http://localhost:8080/api/pacientes/${cedula}`, {
     method: "PUT",

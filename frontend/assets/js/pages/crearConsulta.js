@@ -74,11 +74,12 @@ const guardarBtn = document.querySelector("#btn_guardar");
 guardarBtn.addEventListener("click", async function (event) {
   // Obtén los valores de los campos del formulario de la consulta
   const cedula = urlParams.get("cedula"); // Cédula del paciente
-  const peso = parseFloat(document.getElementById("i_peso").value);
   const fecha = document.getElementById("i_fcon").value;
   const notaEvolutiva = document.getElementById("ta_notaEvolutiva").value;
   const recipe = document.getElementById("text-recipe").innerText;
   const indicaciones = document.getElementById("text-indicaciones").innerText;
+  const pesoInput = document.getElementById("i_peso");
+  const peso = parseFloat(pesoInput.value.replace(",", "."));
 
   // Verificar si algún campo está vacío
   if (!cedula || isNaN(peso) || !fecha || !notaEvolutiva || !recipe.trim() || !indicaciones.trim()) {
@@ -88,6 +89,11 @@ guardarBtn.addEventListener("click", async function (event) {
       "warning"
     );
     return; // Detener la ejecución si hay campos vacíos
+  }
+
+  if (isNaN(peso) || peso <= 0) {
+    Swal.fire("¡Peso inválido!", "Por favor ingresa un peso válido mayor a 0.", "error");
+    return; // Detener la ejecución si el peso es inválido
   }
 
   // Crea un objeto con los datos de la consulta en formato JSON
