@@ -425,30 +425,91 @@ function mostrarModalDocumentos(idConsulta) {
 }
 
 function imprimirPDF() {
-  // Crear una instancia de jsPDF
   window.jsPDF = window.jspdf.jsPDF;
   const pdf = new jsPDF({
-    unit: 'in',  // Unidades en pulgadas
-    format: [8.5, 5.5],  // Tamaño de la hoja: 8.5 x 5.5 pulgadas
-    orientation: 'landscape', // Cambiar a orientación vertical
+    unit: 'in',
+    format: [8.5, 5.5],
+    orientation: 'landscape',
+    margin: 0.25,
   });
 
-  // Definir la posición inicial para la primera columna
-  let x1 = 0.5; // 0.5 pulgadas desde el margen izquierdo
-  let x2 = 4.25; // 4.25 pulgadas desde el margen izquierdo (la mitad del ancho de la página)
+  const imageUrl = "./assets/images/recipe/header.jpg";
+  const footerImageUrl = "./assets/images/recipe/footer.jpg";
+  const imageWidth = pdf.internal.pageSize.getWidth() / 2 - 0.5;
+  const img = new Image();
+  img.src = imageUrl;
 
-  // Agregar contenido a la primera columna
-  pdf.text('Columna 1:', x1, 0.5);
-  pdf.text('Contenido de la columna 1.', x1, 0.7);
+  img.onload = function () {
+    const imageHeight = (img.height * imageWidth) / img.width;
 
-  // Agregar contenido a la segunda columna
-  pdf.text('Columna 2:', x2, 0.5);
-  pdf.text('Contenido de la columna 2.', x2, 0.7);
+    // Obtener los datos del paciente desde el formulario
+    const nombrePaciente = document.getElementById("i_nombre").value;
+    const cedulaNacionalidad = document.getElementById("s_nacionalidad").value.charAt(0) + document.getElementById("i_cedula").value;
+    const fechaConsulta = document.querySelector(".table tbody tr:first-child td:nth-child(2)").textContent; // Obtener la fecha de la primera consulta
+    const indicacionesPaciente = document.querySelector(".indicaciones-modal").textContent === "No hay datos disponibles" ? "" : document.querySelector(".indicaciones-modal").textContent;
+    const recipePaciente = document.querySelector(".recipe-modal").textContent === "No hay datos disponibles" ? "" : document.querySelector(".recipe-modal").textContent;
 
-  // Para mostrar el PDF en una nueva ventana del navegador:
-  pdf.output('dataurlnewwindow');
+    // Columna izquierda (Recipe)
+    pdf.addImage(imageUrl, 'JPEG', 0.25, 0.25, imageWidth, imageHeight);
+    let y = imageHeight + 0.4;
+
+    pdf.setFontSize(8); // Tamaño de letra más pequeño
+    pdf.text(`Nombre: ${nombrePaciente}`, 0.25, y);
+    y += 0.2;
+    pdf.text(`Cedula: ${cedulaNacionalidad}`, 0.25, y);
+    y += 0.2;
+    pdf.text(`Fecha: ${fechaConsulta}`, 0.25, y);
+
+    y += 0.4;
+
+    pdf.setFontSize(10); // Restaurar el tamaño de letra para el título
+    pdf.text('RECIPE', 0.25, y);
+    y += 0.05;
+    pdf.setLineWidth(0.01);
+    pdf.line(0.25, y, 3.75, y);
+    y += 0.05;
+
+    // Texto del Recipe
+    pdf.setFontSize(8); // Tamaño de letra más pequeño
+    const splitRecipe = pdf.splitTextToSize(recipePaciente, 3.5);
+    pdf.text(0.25, y, splitRecipe);
+
+    // Agregar imagen de footer en la columna izquierda (Recipe)
+    const footerImgWidth = 4;
+    const footerImgHeight = (.5 * footerImgWidth) / 4;
+    pdf.addImage(footerImageUrl, 'JPEG', 0.25, pdf.internal.pageSize.getHeight() - footerImgHeight - 0.25, footerImgWidth, footerImgHeight);
+
+    // Columna derecha (Indicaciones)
+    pdf.addImage(imageUrl, 'JPEG', pdf.internal.pageSize.getWidth() / 2 + 0.25, 0.25, imageWidth, imageHeight);
+    y = imageHeight + 0.4;
+
+    pdf.setFontSize(8); // Tamaño de letra más pequeño
+    pdf.text(`Nombre: ${nombrePaciente}`, pdf.internal.pageSize.getWidth() / 2 + 0.25, y);
+    y += 0.2;
+    pdf.text(`Cedula: ${cedulaNacionalidad}`, pdf.internal.pageSize.getWidth() / 2 + 0.25, y);
+    y += 0.2;
+    pdf.text(`Fecha: ${fechaConsulta}`, pdf.internal.pageSize.getWidth() / 2 + 0.25, y);
+
+    y += 0.4;
+
+    pdf.setFontSize(10); // Restaurar el tamaño de letra para el título
+    pdf.text('INDICACIONES', pdf.internal.pageSize.getWidth() / 2 + 0.25, y);
+    y += 0.05;
+    pdf.setLineWidth(0.01);
+    pdf.line(pdf.internal.pageSize.getWidth() / 2 + 0.25, y, pdf.internal.pageSize.getWidth() - 0.25, y);
+    y += 0.05;
+
+    // Texto de las Indicaciones
+    pdf.setFontSize(8); // Tamaño de letra más pequeño
+    const splitIndicaciones = pdf.splitTextToSize(indicacionesPaciente, 3.5);
+    pdf.text(pdf.internal.pageSize.getWidth() / 2 + 0.25, y, splitIndicaciones);
+
+    // Agregar imagen de footer en la columna derecha (Indicaciones)
+    pdf.addImage(footerImageUrl, 'JPEG', pdf.internal.pageSize.getWidth() / 2 + 0.25, pdf.internal.pageSize.getHeight() - footerImgHeight - 0.25, footerImgWidth, footerImgHeight);
+
+    pdf.output('dataurlnewwindow');
+  };
 }
 
-// Llamar a la función para imprimir el PDF
-imprimirPDF();
+
 
