@@ -467,7 +467,7 @@ function imprimirPDF() {
     y += 0.05;
     pdf.setLineWidth(0.01);
     pdf.line(0.25, y, 3.75, y);
-    y += 0.05;
+    y += 0.1;
 
     // Texto del Recipe
     pdf.setFontSize(8); // Tamaño de letra más pequeño
@@ -497,7 +497,7 @@ function imprimirPDF() {
     y += 0.05;
     pdf.setLineWidth(0.01);
     pdf.line(pdf.internal.pageSize.getWidth() / 2 + 0.25, y, pdf.internal.pageSize.getWidth() - 0.25, y);
-    y += 0.05;
+    y += 0.1;
 
     // Texto de las Indicaciones
     pdf.setFontSize(8); // Tamaño de letra más pequeño
