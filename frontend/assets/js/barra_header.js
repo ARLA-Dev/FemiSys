@@ -6,7 +6,7 @@ barra_header.innerHTML =
       <a href="index.html" class="b-brand">
 
         <div class="b-bg">
-          <i class="feather icon-trending-up"></i>
+          <i class="fas fa-user-md"></i>
         </div>
 
         <span class="b-title">FemiSys</span>

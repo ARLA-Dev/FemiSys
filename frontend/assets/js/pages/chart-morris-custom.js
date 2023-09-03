@@ -61,7 +61,7 @@ $(document).ready(function() {
         responsive:true,
         ykeys: ['a'],
         labels: ['Consultas'],
-        barColors: ["0-#1de9b6-#1dc4e9"]
+        barColors: ["0-#c8b6ff-#9c89b8"]
     });
     // [ bar-stacked ] chart end
 

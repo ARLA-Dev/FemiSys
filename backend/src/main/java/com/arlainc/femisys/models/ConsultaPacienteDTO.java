@@ -12,12 +12,14 @@ public class ConsultaPacienteDTO {
     private double peso;
     private Date fecha;
     private String paciente;
+    private String nacionalidad;
 
-    public ConsultaPacienteDTO(String cedula, int id, double peso, Date fecha, String paciente) {
+    public ConsultaPacienteDTO(String cedula, int id, double peso, Date fecha, String paciente, String nacionalidad) {
         this.cedula = cedula;
         this.id = id;
         this.peso = peso;
         this.fecha = fecha;
         this.paciente = paciente;
+        this.nacionalidad = nacionalidad;
     }
 }
