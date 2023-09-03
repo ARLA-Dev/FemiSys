@@ -26,8 +26,10 @@ function renderPage() {
     idCell.textContent = consulta[0].id;
     row.appendChild(idCell);
 
+
+    let letraCedula = consulta[0].nacionalidad.charAt(0);
     const cedulaCell = document.createElement("td");
-    cedulaCell.textContent = consulta[0].cedula;
+    cedulaCell.textContent = letraCedula +  "" + consulta[0].cedula;
     row.appendChild(cedulaCell);
 
     const nombreCompletoCell = document.createElement("td");
