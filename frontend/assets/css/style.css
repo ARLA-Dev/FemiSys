@@ -10601,6 +10601,20 @@ textarea{
   background-color: #9c89b8;
 }
 
+.editor-de-texto-crear-consulta{
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-de-texto-crear-consulta textarea{
+  min-height: 400px;
+  resize: vertical;
+  background: #f4f7fa;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  color: #495057;
+}
+
 
 @-webkit-keyframes pulse {
 	0% {

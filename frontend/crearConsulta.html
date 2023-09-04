@@ -114,20 +114,18 @@
                           </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 editor-de-texto-crear-consulta">
 
                           <label  class="form-label mb-2">Recipe</label>
-                          <div id="editor-recipe" class="form-control"></div>
-                          <div id="text-recipe" style="display: none;"></div>
+                          <textarea id="text-recipe"></textarea>
 
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 editor-de-texto-crear-consulta">
 
                         
                           <label class="form-label mb-2">Indicaciones</label>
-                          <div id="editor-indicaciones" class="form-control"></div>
-                          <div id="text-indicaciones" style="display: none;"></div>
+                          <textarea id="text-indicaciones" ></textarea>
                           
                         </div>
 
@@ -162,34 +160,9 @@
     </script>
     <script src="assets/js/barra_navegacion.js"></script>
     <script src="assets/js/barra_header.js"></script>
-    <script src="assets/plugins/pell/pell.min.js"></script>
     <script src="assets/plugins/jsPDF/jspdf.umd.min.js"></script>
     <script src="assets/js/pages/crearConsulta.js"></script>
     <!-- FIN JS REQUERIDO -->
-
-    <script>
-      const pell = window.pell;
-      const pell2 = window.pell;
-      const editorR = document.getElementById("editor-recipe");
-      const editorI = document.getElementById("editor-indicaciones");
-
-      pell.init({
-        element: editorR,
-        actions: ['bold', 'italic', 'olist', 'ulist'],
-        onChange: function (html) {
-          document.getElementById('text-recipe').textContent = html
-        }
-      })
-
-      pell2.init({
-        element: editorI,
-        actions: ['bold', 'italic',  'olist', 'ulist'],
-        onChange: function (html) {
-          document.getElementById('text-indicaciones').textContent = html
-        }
-      })
-    </script>
-    
     <script>
       setTimeout(function(){
         $('.loader_bg').fadeToggle();

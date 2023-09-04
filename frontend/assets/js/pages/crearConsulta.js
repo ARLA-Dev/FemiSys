@@ -80,8 +80,8 @@ guardarBtn.addEventListener("click", async function (event) {
   const cedula = urlParams.get("cedula");
   const fecha = document.getElementById("i_fcon").value;
   const notaEvolutiva = document.getElementById("ta_notaEvolutiva").value;
-  const recipe = document.getElementById("text-recipe").innerText;
-  const indicaciones = document.getElementById("text-indicaciones").innerText;
+  const recipe = document.getElementById("text-recipe").value;
+  const indicaciones = document.getElementById("text-indicaciones").value;
   const pesoInput = document.getElementById("i_peso");
   const peso = parseFloat(pesoInput.value.replace(",", "."));
 
@@ -123,25 +123,21 @@ guardarBtn.addEventListener("click", async function (event) {
 
     if (response.ok) {
       // Si la respuesta es exitosa, muestra un mensaje con SweetAlert2
-      Swal.fire({
-        icon: "success",
-        title: "Éxito",
-        text: "Consulta creada exitosamente.",
-        showCancelButton: true, // Muestra el botón de cancelar
-        confirmButtonText: "Imprimir Documentos", // Texto del botón de confirmación
-        cancelButtonText: "Finalizar", // Texto del botón de cancelar
-
-      }).then((result) => {
-
-        if (result.isConfirmed) {
-          imprimirPDF(document.getElementById("span_ci").innerHTML, document.getElementById("i_fcon").value, document.getElementById("h3_nombre").textContent, document.getElementById("text-recipe").textContent, document.getElementById("text-indicaciones").textContent);
-        } 
-        else {
+      if (response.ok) {
+        // Si la respuesta es exitosa, muestra un mensaje con SweetAlert2
+        Swal.fire({
+          icon: "success",
+          title: "Éxito",
+          text: "Consulta creada exitosamente.",
+          showConfirmButton: true, // Muestra solo el botón "OK" de confirmación
+        }).then((result) => {
+          // Redirecciona después de hacer clic en "OK"
           const urlParams = new URLSearchParams(window.location.search);
           const cedula = urlParams.get("cedula");
           window.location.href = `/paciente.html?cedula=${cedula}`;
-        }
-      });
+        });
+      }
+      
     } else {
       // Si la respuesta no es exitosa, mostrar SweetAlert 2 de error
       Swal.fire({
@@ -160,111 +156,5 @@ guardarBtn.addEventListener("click", async function (event) {
   }
 });
 
-function imprimirPDF(cedula, fecha, nombre_paciente, recipe, indicaciones) {
-  window.jsPDF = window.jspdf.jsPDF;
-  const pdf = new jsPDF({
-    unit: 'in',
-    format: [8.5, 5.5],
-    orientation: 'landscape',
-    margin: 0.25,
-  });
-
-  const imageUrl = "./assets/images/recipe/header.jpg";
-  const footerImageUrl = "./assets/images/recipe/footer.jpg";
-  const imageWidth = pdf.internal.pageSize.getWidth() / 2 - 0.5;
-  const img = new Image();
-  img.src = imageUrl;
-
-  img.onload = function () {
-    const imageHeight = (img.height * imageWidth) / img.width;
-    const cedulaNacionalidad = cedula;
-    const nombrePaciente = nombre_paciente;
-    const fechaConsulta = fecha;
-    const indicacionesPaciente = indicaciones;
-    const recipePaciente = recipe;
-
-    // Columna izquierda (Recipe)
-    pdf.addImage(imageUrl, 'JPEG', 0.25, 0.25, imageWidth, imageHeight);
-    let y = imageHeight + 0.4;
-
-    pdf.setFontSize(8); // Tamaño de letra más pequeño
-    pdf.text(`Nombre: ${nombrePaciente}`, 0.25, y);
-    y += 0.2;
-    pdf.text(`Cedula: ${cedulaNacionalidad}`, 0.25, y);
-    y += 0.2;
-    pdf.text(`Fecha: ${fechaConsulta}`, 0.25, y);
-
-    y += 0.4;
-
-    pdf.setFontSize(10); // Restaurar el tamaño de letra para el título
-    pdf.text('RECIPE', 0.25, y);
-    y += 0.05;
-    pdf.setLineWidth(0.01);
-    pdf.line(0.25, y, 3.75, y);
-    y += 0.1;
-
-    // Texto del Recipe
-    pdf.setFontSize(8); // Tamaño de letra más pequeño
-    const recipePlainText = stripHtml(recipe);
-    const splitRecipe = pdf.splitTextToSize(recipePlainText, 3.5);
-    pdf.text(0.25, y, splitRecipe);
-
-    // Agregar imagen de footer en la columna izquierda (Recipe)
-    const footerImgWidth = 4;
-    const footerImgHeight = (.5 * footerImgWidth) / 4;
-    pdf.addImage(footerImageUrl, 'JPEG', 0.25, pdf.internal.pageSize.getHeight() - footerImgHeight - 0.25, footerImgWidth, footerImgHeight);
-
-    // Columna derecha (Indicaciones)
-    pdf.addImage(imageUrl, 'JPEG', pdf.internal.pageSize.getWidth() / 2 + 0.25, 0.25, imageWidth, imageHeight);
-    y = imageHeight + 0.4;
-
-    pdf.setFontSize(8); // Tamaño de letra más pequeño
-    pdf.text(`Nombre: ${nombrePaciente}`, pdf.internal.pageSize.getWidth() / 2 + 0.25, y);
-    y += 0.2;
-    pdf.text(`Cedula: ${cedulaNacionalidad}`, pdf.internal.pageSize.getWidth() / 2 + 0.25, y);
-    y += 0.2;
-    pdf.text(`Fecha: ${fechaConsulta}`, pdf.internal.pageSize.getWidth() / 2 + 0.25, y);
-
-    y += 0.4;
-
-    pdf.setFontSize(10); // Restaurar el tamaño de letra para el título
-    pdf.text('INDICACIONES', pdf.internal.pageSize.getWidth() / 2 + 0.25, y);
-    y += 0.05;
-    pdf.setLineWidth(0.01);
-    pdf.line(pdf.internal.pageSize.getWidth() / 2 + 0.25, y, pdf.internal.pageSize.getWidth() - 0.25, y);
-    y += 0.1;
-
-    // Texto de las Indicaciones
-    pdf.setFontSize(8); // Tamaño de letra más pequeño
-    const indicacionesPlainText = stripHtml(indicaciones);
-    const splitIndicaciones = pdf.splitTextToSize(indicacionesPlainText, 3.5);
-    pdf.text(pdf.internal.pageSize.getWidth() / 2 + 0.25, y, splitIndicaciones);
-
-    // Agregar imagen de footer en la columna derecha (Indicaciones)
-    pdf.addImage(footerImageUrl, 'JPEG', pdf.internal.pageSize.getWidth() / 2 + 0.25, pdf.internal.pageSize.getHeight() - footerImgHeight - 0.25, footerImgWidth, footerImgHeight);
-
-    // Abrir el PDF en una nueva ventana sin opción de guardar
-    pdf.output('dataurlnewwindow');
-
-    setTimeout(function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const cedula = urlParams.get("cedula");
-      window.location.href = `/paciente.html?cedula=${cedula}`;
-    }, 1000); // Cambia el valor del retraso según tus necesidades
-  };
-}
-
-function stripHtml(html) {
-  const tmp = document.createElement("div");
-  tmp.innerHTML = html;
-
-  // Reemplaza las etiquetas de salto de línea <br> con saltos de línea reales
-  tmp.querySelectorAll('br').forEach((br) => {
-    const newline = document.createTextNode('\n');
-    br.parentNode.replaceChild(newline, br);
-  });
-
-  return tmp.textContent || tmp.innerText || "";
-}
 
 

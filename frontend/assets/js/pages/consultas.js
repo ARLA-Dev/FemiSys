@@ -299,8 +299,8 @@ function mostrarModalDocumentos(idConsulta) {
         const indicaciones = modal.querySelector(".indicaciones-modal");
 
         // Mostrar los datos en el modal con formato (usar innerHTML directamente)
-        recipe.innerHTML = data[0][0] || "No hay datos disponibles";
-        indicaciones.innerHTML = data[0][1] || "No hay datos disponibles";
+        recipe.textContent = data[0][0] || "No hay datos disponibles";
+        indicaciones.textContent = data[0][1] || "No hay datos disponibles";
 
         // Mostrar el modal
         const bsModal = new bootstrap.Modal(modal);
