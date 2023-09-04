@@ -17,7 +17,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     Paciente findByCedula(String cedula);
 
-    @Query("SELECT p.cedula AS cedula, p.paciente AS paciente, COUNT(c) AS cantidadConsultas " +
+    @Query("SELECT p.cedula AS cedula, p.paciente AS paciente, p.nacionalidad AS nacionalidad, COUNT(c) AS cantidadConsultas " +
             "FROM Paciente p LEFT JOIN Consulta c ON p.cedula = c.cedula " +
             "WHERE p.cedula = :cedula AND p.borrado = 0 " +
             "GROUP BY p.cedula, p.paciente")
