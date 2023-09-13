@@ -134,7 +134,7 @@ guardarBtn.addEventListener("click", async function (event) {
           // Redirecciona después de hacer clic en "OK"
           const urlParams = new URLSearchParams(window.location.search);
           const cedula = urlParams.get("cedula");
-          window.location.href = `/paciente.html?cedula=${cedula}`;
+          window.location.href = `paciente.html?cedula=${cedula}`;
         });
       }
       

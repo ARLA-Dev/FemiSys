@@ -304,7 +304,7 @@ modificarBtn.addEventListener("click", () => {
     return;
   }
 
-  const nombreCompleto = nombre + apellido;
+  const nombreCompleto = paciente;
 
   if (nombreCompleto.length > 255 || lugarNacimiento.length > 255 || direccion.length > 255) {
     Swal.fire(
