@@ -11,12 +11,22 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^26.2.1"
+    "electron": "^26.2.1",
+    "electron-builder": "^24.6.4"
   },
-  "build":{
-    "appId": "com.example.electron",
+  "build": {
+    "appId": "com.example.femisys",
     "productName": "Femisys",
-    "icon": "./assets/images/favicon.png"
-
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "/assets/images/favicon.png" 
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "/assets/images/favicon.png" 
+    }
   }
 }

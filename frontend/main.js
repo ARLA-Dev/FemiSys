@@ -5,6 +5,8 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1366, 
     height: 1024, 
+    autoHideMenuBar: true,
+    icon: path.join(__dirname, './assets/images/favicon.png'),
     webPreferences: {
       nodeIntegration: false, // Requerido para la seguridad
       contextIsolation: true,
