@@ -4,11 +4,19 @@ const fechaHoy = new Date().toISOString().split('T')[0];
 document.getElementById('i_fnac').max = fechaHoy;
 
 
+function sumarUnDia(fecha) {
+  const date = new Date(fecha);
+  date.setDate(date.getDate() + 1); // Sumar un día
+  return date.toISOString().split('T')[0];
+}
+
+
 // Agrega un event listener al botón de guardar
 guardarBtn.addEventListener('click', async function(event) {
   // Obtén los valores de los campos del formulario
   const cedula = document.getElementById('i_cedula').value;
-  const fechaNacimiento = document.getElementById('i_fnac').value;
+  let fechaNacimiento = document.getElementById('i_fnac').value;
+  fechaNacimiento = sumarUnDia(fechaNacimiento);
   const nombre = document.getElementById('i_nombre').value.toUpperCase();
   const apellido = document.getElementById('i_apellido').value.toUpperCase();
   const nacionalidad = document.getElementById('s_nacionalidad').value;

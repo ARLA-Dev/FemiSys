@@ -250,6 +250,12 @@ function formatDate(dateString) {
   return `${year}-${month}-${day}`;
 }
 
+function sumarUnDia(fecha) {
+  const date = new Date(fecha);
+  date.setDate(date.getDate() + 1); // Sumar un día
+  return date.toISOString().split('T')[0];
+}
+
 const modificarBtn = document.querySelector("#btn_modificar");
 
 modificarBtn.addEventListener("click", () => {
@@ -257,7 +263,8 @@ modificarBtn.addEventListener("click", () => {
   const paciente = document.getElementById("i_nombre").value;
   const direccion = document.getElementById("i_direccion").value;
   const telefono = document.getElementById("i_telefono").value;
-  const fechaNacimiento = document.getElementById("i_fnac").value;
+  let fechaNacimiento = document.getElementById("i_fnac").value;
+  fechaNacimiento = sumarUnDia(fechaNacimiento);
   const lugarNacimiento = document.getElementById("i_lnac").value;
   const estadoCivil = document.getElementById("s_edocivil").value;
   const nacionalidad = document.getElementById("s_nacionalidad").value;

@@ -74,11 +74,18 @@ if (/^\d+$/.test(cedula) && cedula.trim() !== "") {
 // Obtén una referencia al botón de guardar
 const guardarBtn = document.querySelector("#btn_guardar");
 
+function sumarUnDia(fecha) {
+  const date = new Date(fecha);
+  date.setDate(date.getDate() + 1); // Sumar un día
+  return date.toISOString().split("T")[0];
+}
+
 // Agrega un event listener al botón de guardar
 guardarBtn.addEventListener("click", async function (event) {
 
   const cedula = urlParams.get("cedula");
-  const fecha = document.getElementById("i_fcon").value;
+  const fechaConsultaElement = document.getElementById("i_fcon");
+  const fecha = sumarUnDia(fechaConsultaElement.value); 
   const notaEvolutiva = document.getElementById("ta_notaEvolutiva").value;
   const recipe = document.getElementById("text-recipe").value;
   const indicaciones = document.getElementById("text-indicaciones").value;
