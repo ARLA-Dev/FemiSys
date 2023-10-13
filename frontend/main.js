@@ -6,7 +6,7 @@ function createWindow() {
     width: 1366, 
     height: 1024, 
     autoHideMenuBar: true,
-    icon: path.join(__dirname, './assets/images/favicon.png'),
+    icon: path.join(__dirname, './assets/images/favicon.ico'),
     webPreferences: {
       nodeIntegration: false, // Requerido para la seguridad
       contextIsolation: true,
