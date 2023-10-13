@@ -22,8 +22,9 @@ function renderPage() {
     const row = document.createElement("tr");
 
     // Agregar las celdas con los datos del paciente a la fila
+    let letraCedula = paciente.nacionalidad.charAt(0);
     const cedulaCell = document.createElement("td");
-    cedulaCell.textContent = paciente.cedula;
+    cedulaCell.textContent = letraCedula + paciente.cedula;
     row.appendChild(cedulaCell);
 
     const nombreCompletoCell = document.createElement("td");

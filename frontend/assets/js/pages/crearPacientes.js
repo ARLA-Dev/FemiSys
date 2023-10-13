@@ -161,4 +161,31 @@ guardarBtn.addEventListener('click', async function(event) {
   }
 });
 
+function calcularEdad() {
+  const inputFnac = document.getElementById("i_fnac");
+  const spanEdad = document.getElementById("span_edad");
+
+  if (inputFnac.value) {
+    const fechaNacimiento = new Date(inputFnac.value);
+    const hoy = new Date();
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate()-1 < fechaNacimiento.getDate())) {
+      edad--;
+    }
+
+    spanEdad.textContent = `(${edad} Años)`;
+  } else {
+    spanEdad.textContent = "";
+  }
+}
+
+// Agrega un evento para que se calcule la edad cuando cambie el valor del input
+const inputFnac = document.getElementById("i_fnac");
+inputFnac.addEventListener("change", calcularEdad);
+
+// Calcula la edad inicialmente al cargar la página
+calcularEdad();
+
 
