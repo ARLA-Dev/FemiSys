@@ -5,6 +5,7 @@ import com.arlainc.femisys.repositories.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ConsultaServiceImpl implements ConsultaService {
@@ -24,6 +25,12 @@ public class ConsultaServiceImpl implements ConsultaService {
     @Override
     public List<Consulta> obtenerConsultasPorCedula(String cedula) {
         return consultaRepository.findByCedula(cedula);
+    }
+
+    @Override
+    public Consulta obtenerConsulta(Long idConsulta) {
+        Optional<Consulta> consultaOpt = consultaRepository.findById(idConsulta);
+        return consultaOpt.orElse(null);
     }
 
     @Override
@@ -53,6 +60,12 @@ public class ConsultaServiceImpl implements ConsultaService {
     public List<Object[]> contarConsultasPorMesUltimoAnio() {
         return consultaRepository.contarConsultasPorMesUltimoAnio();
     }
+
+    @Override
+    public void eliminarConsulta(Long idConsulta) {
+        consultaRepository.deleteById(idConsulta);
+    }
+
 
 }
 

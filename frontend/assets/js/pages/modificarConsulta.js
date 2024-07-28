@@ -41,47 +41,6 @@ function llenarDatosPaciente(data) {
   }`;
 }
 
-
-//Función para obtener los datos de la consulta
-
-async function obtenerDatosConsulta(id) {
-  try {
-    const response = await fetch(
-      `http://localhost:8080/api/consultas/consulta/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-        },
-      }
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      alert("Error al obtener los datos de la consulta");
-    }
-  } catch (error) {
-    alert("Error:", error);
-  }
-}
-
-// Función para llenar los datos de la consulta en el HTML
-async function llenarDatosConsulta(id) {
-  const data = await obtenerDatosConsulta(id);
-
-  if (data) {
-
-    document.getElementById("i_fcon").value =  obtenerFechaActual();
-    document.getElementById("i_peso").value = data.peso;
-    document.getElementById("ta_notaEvolutiva").value = data.nota_evolutiva;
-    document.getElementById("text-recipe").value = data.recipe;
-    document.getElementById("text-indicaciones").value = data.indicaciones;
-  }
-}
-
 // Obtén la cédula del paciente de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const cedula = urlParams.get("cedula");
@@ -110,17 +69,10 @@ if (/^\d+$/.test(cedula) && cedula.trim() !== "") {
   window.location.href = "pacientes.html";
 }
 
-const idConsulta = urlParams.get("id") || null;
-
-if (idConsulta) {
-  llenarDatosConsulta(idConsulta);
-}
-
 //CREAR CONSULTA
 
 // Obtén una referencia al botón de guardar
-const guardarBtn = document.querySelector("#btn_guardar") || null;
-const modificarBtn = document.querySelector("#btn_modificar") || null;
+const guardarBtn = document.querySelector("#btn_guardar");
 
 function sumarUnDia(fecha) {
   const date = new Date(fecha);
@@ -128,8 +80,6 @@ function sumarUnDia(fecha) {
   return date.toISOString().split("T")[0];
 }
 
-
-if (guardarBtn) {
 // Agrega un event listener al botón de guardar
 guardarBtn.addEventListener("click", async function (event) {
 
@@ -212,96 +162,6 @@ guardarBtn.addEventListener("click", async function (event) {
     });
   }
 });
-
-
-}
-
-if (modificarBtn) {
-  // Agrega un event listener al botón de modificar
-  modificarBtn.addEventListener("click", async function (event) {
-    const cedula = urlParams.get("cedula");
-    const fechaConsultaElement = document.getElementById("i_fcon");
-    const fecha = sumarUnDia(fechaConsultaElement.value); 
-    const notaEvolutiva = document.getElementById("ta_notaEvolutiva").value;
-    const recipe = document.getElementById("text-recipe").value;
-    const indicaciones = document.getElementById("text-indicaciones").value;
-    const pesoInput = document.getElementById("i_peso");
-    const peso = parseFloat(pesoInput.value.replace(",", ".")); 
-
-    // Verificar si todos los campos estan vacios
-
-    if (!cedula || isNaN(peso) || !fecha || !notaEvolutiva || !recipe.trim() || !indicaciones.trim()) {
-      Swal.fire(
-        "¡Campos vacíos!",
-        "Por favor completa todos los campos para crear la consulta.",
-        "warning"
-      );
-      return; 
-    }
-
-    if (isNaN(peso) || peso <= 0) {
-      Swal.fire("¡Peso inválido!", "Por favor ingresa un peso válido mayor a 0.", "error");
-      return;
-    }
-
-    // Crea un objeto con los datos de la consulta en formato JSON
-    const nuevaConsulta = {
-      cedula,
-      peso,
-      fecha,
-      nota_evolutiva: notaEvolutiva,
-      recipe,
-      indicaciones,
-    };
-
-    try {
-      // Realiza una solicitud POST al servidor con los datos de la consulta
-      const response = await fetch(`http://localhost:8080/api/consultas/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(nuevaConsulta),
-      });
-
-      if (response.ok) {
-        // Si la respuesta es exitosa, muestra un mensaje con SweetAlert2
-        if (response.ok) {
-          // Si la respuesta es exitosa, muestra un mensaje con SweetAlert2
-          Swal.fire({
-            icon: "success",
-            title: "Éxito",
-            text: "Consulta modificada exitosamente.",
-            showConfirmButton: true, // Muestra solo el botón "OK" de confirmación
-          }).then((result) => {
-            // Redirecciona aquí de hacer clic en "OK"
-            const urlParams = new URLSearchParams(window.location.search);
-            const cedula = urlParams.get("cedula");
-            window.location.href = `paciente.html?cedula=${cedula}`;
-          });
-        }
-      } else {
-        // Si la respuesta no es exitosa, mostrar SweetAlert 2 de error
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Error al modificar la consulta.",
-        });
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Ocurrió un error al modificar la consulta.",
-      });
-    }
-  });
-
-
-}
-
 
 
 

@@ -39,6 +39,7 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
             "ORDER BY m.mes;\n", nativeQuery = true)
     List<Object[]> contarConsultasPorMesUltimoAnio();
 
+
 }
 
 

@@ -9,6 +9,8 @@ public interface ConsultaService {
 
     List<Consulta> obtenerConsultasPorCedula(String cedula);
 
+    Consulta obtenerConsulta(Long idConsulta);
+
     Consulta crearConsulta(Consulta consulta);
 
     Object[] obtenerDetalleConsulta(Long idConsulta);
@@ -18,4 +20,7 @@ public interface ConsultaService {
     long contarConsultasThisYear();
 
     List<Object[]> contarConsultasPorMesUltimoAnio();
+
+    void eliminarConsulta(Long idConsulta);
+
 }

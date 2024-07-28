@@ -89,7 +89,39 @@ function obtenerConsultasPaciente(cedula) {
           });
 
           documentos.appendChild(verDocumentos);
+
+
+          let acciones = document.createElement("td");
+
+          let duplicarConsulta = document.createElement("a");
+          duplicarConsulta.className = "copy";
+          duplicarConsulta.style.cursor = "pointer";
+          duplicarConsulta.innerHTML = '<i class="material-icons color-m">&#xe14d;</i>';
+          duplicarConsulta.addEventListener("click", () => {
+            window.location.href = `crearConsulta.html?cedula=${cedula}&id=${consulta.id}`;
+          });
+          acciones.appendChild(duplicarConsulta);
+
+          let modificarConsulta = document.createElement("a");
+          modificarConsulta.className = "edit";
+          modificarConsulta.style.cursor = "pointer";
+          modificarConsulta.innerHTML = '<i class="material-icons color-m">&#xe3c9;</i>';
+          modificarConsulta.addEventListener("click", () => {
+            window.location.href = `modificarConsulta.html?cedula=${cedula}&id=${consulta.id}`;
+          });
+          acciones.appendChild(modificarConsulta);
+
+          let eliminarConsulta = document.createElement("a");
+          eliminarConsulta.className = "delete";
+          eliminarConsulta.style.cursor = "pointer";
+          eliminarConsulta.innerHTML = '<i class="material-icons color-m">&#xe872;</i>';
+          eliminarConsulta.addEventListener("click", () => {
+            eliminarConsultaPaciente(consulta.id);
+          });
+          acciones.appendChild(eliminarConsulta);
+          
           fila.appendChild(documentos);
+          fila.appendChild(acciones);
           tablaConsultas.appendChild(fila);
         });
 
@@ -254,6 +286,37 @@ function sumarUnDia(fecha) {
   const date = new Date(fecha);
   date.setDate(date.getDate() + 1); // Sumar un día
   return date.toISOString().split('T')[0];
+}
+
+function eliminarConsultaPaciente(idConsulta) {
+  fetch(`http://localhost:8080/api/consultas/consulta/${idConsulta}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+
+        // Si la respuesta es exitosa, muestra un mensaje con SweetAlert2 con OK button hasta que den a OK y al dar aceptar recarga la pagina
+        Swal.fire({
+          icon: "success",
+          title: "¡Consulta eliminada!",
+          text: "La consulta ha sido eliminada exitosamente.",
+          showConfirmButton: true,
+        }).then(() => {
+          location.reload();
+        });
+      } else {
+        throw new Error("Error al eliminar la consulta");
+      }
+    })
+    .catch((error) => {
+
+      // Si hay un error, muestra un mensaje de error con SweetAlert2
+      Swal.fire("¡Error!", "Ocurrio un error al eliminar la consulta.", "error");
+      console.error("Error:", error);
+    });
 }
 
 const modificarBtn = document.querySelector("#btn_modificar");

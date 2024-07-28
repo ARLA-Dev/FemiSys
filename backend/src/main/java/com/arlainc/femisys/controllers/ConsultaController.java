@@ -26,6 +26,17 @@ public class ConsultaController {
         return ResponseEntity.ok(consultas);
     }
 
+    @GetMapping("/consulta/{idConsulta}")
+    public ResponseEntity<Consulta> obtenerConsulta(@PathVariable Long idConsulta) {
+        Consulta consulta = consultaService.obtenerConsulta(idConsulta);
+        if (consulta != null) {
+            return ResponseEntity.ok(consulta);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @GetMapping("/{cedula}")
     public List<Consulta> obtenerConsultasPorCedula(@PathVariable String cedula) {
         return consultaService.obtenerConsultasPorCedula(cedula);
@@ -74,5 +85,16 @@ public class ConsultaController {
         List<Object[]> consultasPorMes = consultaService.contarConsultasPorMesUltimoAnio();
         return ResponseEntity.ok(consultasPorMes);
     }
+
+    @DeleteMapping("/consulta/{idConsulta}")
+    public ResponseEntity<Void> eliminarConsulta(@PathVariable Long idConsulta) {
+        if (consultaService.obtenerConsulta(idConsulta) != null) {
+            consultaService.eliminarConsulta(idConsulta);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
