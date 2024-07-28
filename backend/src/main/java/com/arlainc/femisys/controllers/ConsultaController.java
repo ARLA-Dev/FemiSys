@@ -96,5 +96,16 @@ public class ConsultaController {
         }
     }
 
+    @PutMapping("/consulta/{idConsulta}")
+    public ResponseEntity<Consulta> modificarConsulta(@PathVariable Long idConsulta, @RequestBody Consulta consulta) {
+        Consulta consultaModificada = consultaService.modificarConsulta(idConsulta, consulta);
+        if (consultaModificada != null) {
+            return ResponseEntity.ok(consultaModificada);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 }

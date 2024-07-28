@@ -256,7 +256,7 @@ if (modificarBtn) {
 
     try {
       // Realiza una solicitud POST al servidor con los datos de la consulta
-      const response = await fetch(`http://localhost:8080/api/consultas/${id}`, {
+      const response = await fetch(`http://localhost:8080/api/consultas/consulta/${idConsulta}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

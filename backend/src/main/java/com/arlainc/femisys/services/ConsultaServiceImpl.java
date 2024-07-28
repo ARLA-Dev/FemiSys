@@ -66,6 +66,17 @@ public class ConsultaServiceImpl implements ConsultaService {
         consultaRepository.deleteById(idConsulta);
     }
 
+    @Override
+    public Consulta modificarConsulta(Long idConsulta, Consulta consulta) {
+        if (consultaRepository.existsById(idConsulta)) {
+            consulta.setId(Math.toIntExact(idConsulta));
+            return consultaRepository.save(consulta);
+        } else {
+            return null;
+        }
+    }
+
+
 
 }
 
